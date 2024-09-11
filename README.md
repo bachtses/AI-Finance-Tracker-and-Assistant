@@ -1,1 +1,5 @@
-# Fridge-Assistant
+Milk
+Chocolate
+Water
+Carrots
+Eggs
