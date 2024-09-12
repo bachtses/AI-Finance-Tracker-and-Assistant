@@ -1,4 +1,1 @@
-- 1 Milk
-- 1 Chocolate
-- 5 Carrots
-- 12 Eggs
+
