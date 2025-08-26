@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify, send_from_directory, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # Serve index.html from repo root (keep if your index.html is at project root)
-app = Flask(__name__, static_folder='', static_url_path='')
+app = Flask(__name__, static_folder='static', static_url_path='')
 
 # Secrets from env
 app.secret_key = os.getenv("SECRET_KEY", "dev-key")
@@ -72,7 +72,7 @@ insert_default_categories()
 # Serve the index page
 @app.route('/')
 def index():
-    return send_from_directory(app.static_folder or '.', 'index.html')
+    return send_from_directory('static', 'index.html')
 
 
 #//////////////////////////////////////////////////////////////////////////////////////////////////
