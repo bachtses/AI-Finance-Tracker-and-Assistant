@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Expense Tracker</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+</head>
+<body>
+
+  <div id="page-register" class="page">
+    <div class="login-box">
+      <h2>Create Account</h2>
+      <input type="text" id="register-fullname" placeholder="Full Name" />
+      <input type="text" id="register-username" placeholder="Username" />
+      <input type="password" id="register-password" placeholder="Password" />
+      <button onclick="registerUser()">Register</button>
+      <p id="register-error" style="color: red;"></p>
+      <p id="register-success" style="color: green; display: none; text-align: center;"></p>
+      <p>Already have an account? <a href="#" onclick="showPage('page-login')">Login here</a></p>
+    </div>
+  </div>
+
+  <div id="page-login" class="page">
+    <div class="login-box">
+      <h2>Welcome Back</h2>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="login()">Login</button>
+      <p id="login-error-message" style="color: red; display: none;"></p>
+      <p>Don't have an account? <a href="#" onclick="showPage('page-register')">Register</a></p>
+    </div>
+  </div>
+
+ 
+  <div id="page1" class="page">
+    <div class="container">
+      <div class="top-bar">
+        <h1 class="top-bar-title">Home</h1>
+        <div class="user-menu">
+          <i class="fa fa-user" onclick="toggleUserMenu()"></i>
+          <div class="dropdown-content">
+            <a href="#" onclick="logout()">Log out</a>
+          </div>
+        </div>
+      </div>
+      <div class="user-dialog-container">
+        <h2 id="greeting"></h2>
+        <textarea id="userInput" placeholder="Use AI to enter your expenses here. &#10;You could say: I spent 420 euros on Pizza" rows="3" cols="50"></textarea>
+        <div class="button-container">
+          <button class="speak-btn" onclick="startVoiceInput()"><i class="fa fa-microphone" aria-hidden="true"></i> Voice</button>
+          <button class="submit-btn" onclick="getExpensesFromChatGPT()">Submit</button>            
+        </div>
+      </div>
+      <div class="month-navigation">
+        <span id="currentMonthDisplay"></span>
+        <button id="prevMonth" class="arrow-btn" onclick="changeMonth(-1)">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        <button id="nextMonth" class="arrow-btn" onclick="changeMonth(1)">
+            <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>      
+      <table id="expenseTable">
+        <thead>
+        </thead>
+        <tbody id="expenseListDisplay"></tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div id="page2" class="page">
+    <div class="top-bar">
+      <h1 class="top-bar-title">Statistics</h1>
+      <i class="fa fa-user" aria-hidden="true"></i>
+    </div>
+    <div class="container">
+      <div class="month-navigation">
+        <span id="currentMonthStatsDisplay"></span>
+        <button id="prevMonthStats" class="arrow-btn" onclick="changeStatsMonth(-1)">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        <button id="nextMonthStats" class="arrow-btn" onclick="changeStatsMonth(1)">
+            <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+      <canvas id="categoryChart"></canvas>
+      <h3 class="category-bars-title">
+        <span class="left-title">Expenses Breakdown</span>
+        <span class="right-title">Total</span>
+      </h3>
+      <div id="category-bars"></div>
+    </div>
+  </div>
+
+  <div id="page3" class="page">
+    <div class="top-bar">
+        <h1 class="top-bar-title">Assistant</h1>
+        <i class="fa fa-user" aria-hidden="true"></i>
+    </div>
+    <div class="container">
+        <h2></h2>
+        <textarea id="consultQuestion" placeholder="Use the AI assistant to explore your expenses, discover patterns, and get answers to questions. &#10;You could say: What are some saving tips based on my last 3 months?" rows="3"></textarea>
+        <div class="button-container">
+            <button class="submit-btn" onclick="sendConsultQuestion()">Ask AI</button>
+        </div>
+        <div id="consultResponse" class="wrapExpensesReport">
+            <p></p>
+        </div>
+    </div>
+  </div>
+
+
+  <div id="menu-bar" class="menu-bar">
+    <button onclick="showPage('page1')">
+      <i class="fa fa-home"></i>
+      <span class="menu-text">Home</span>
+    </button>
+    <button onclick="showPage('page2')">
+      <i class="fa fa-bar-chart"></i>
+      <span class="menu-text">Statistics</span>
+    </button>
+    <button onclick="showPage('page3')">
+      <i class="fa fa-comments" aria-hidden="true"></i>
+      <span class="menu-text">Assistant</span>
+    </button>
+  </div>
+
+  <script src="scripts.js"></script>
+ 
+</body>
+</html>

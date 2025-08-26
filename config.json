@@ -1,0 +1,4 @@
+{
+  "SSL_CERT_PATH": "ssl/cert.pem",
+  "SSL_KEY_PATH": "ssl/key.pem"
+}
