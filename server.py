@@ -6,32 +6,38 @@ from datetime import datetime, timezone
 from flask import Flask, request, jsonify, send_from_directory, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# Serve index.html from repo root (keep if your index.html is at project root)
-app = Flask(__name__, static_folder='static', static_url_path='')
 
-# Secrets from env
+app = Flask(__name__, static_folder='static', static_url_path='')
 app.secret_key = os.getenv("SECRET_KEY", "dev-key")
 
-# Cookie/session settings (needed if frontend is on a different domain over HTTPS)
-app.config.update(
-    SESSION_COOKIE_SAMESITE="None",
-    SESSION_COOKIE_SECURE=True
-)
+app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True)
 
-# Database path
+# Database path (use env if you add a Render Disk)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATABASE = os.path.join(BASE_DIR, 'database.db')
+DATABASE = os.getenv("DATABASE_PATH", os.path.join(BASE_DIR, "database.db"))
 
-def get_api_key():
-    return os.getenv("OPENAI_API_KEY")
-
-
-
+@app.route("/")
+def root():
+    return send_from_directory("static", "index.html")
 
 def init_db():
     with sqlite3.connect(DATABASE) as conn:
-        cursor = conn.cursor()
-        cursor.execute('''
+        c = conn.cursor()
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                full_name TEXT NOT NULL,
+                username TEXT UNIQUE NOT NULL,
+                password_hash TEXT NOT NULL
+            )
+        """)
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS categories (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT UNIQUE NOT NULL
+            )
+        """)
+        c.execute("""
             CREATE TABLE IF NOT EXISTS expenses (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
@@ -40,23 +46,15 @@ def init_db():
                 amount REAL NOT NULL,
                 user_id INTEGER
             )
-        ''')
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS categories (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT UNIQUE NOT NULL
-            )
-        ''')
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT UNIQUE NOT NULL,
-                password_hash TEXT NOT NULL
-            )
-        ''')
+        """)
         conn.commit()
 
 init_db()
+
+
+def get_api_key():
+    return os.getenv("OPENAI_API_KEY")
+
 
 # Insert common categories
 def insert_default_categories():
@@ -68,11 +66,6 @@ def insert_default_categories():
         conn.commit()
 
 insert_default_categories()
-
-# Serve the index page
-@app.route('/')
-def index():
-    return send_from_directory('static', 'index.html')
 
 
 #//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -305,7 +298,6 @@ def wrap_up_expenses_and_report():
 #//////////////////////////////////////////////////////////////////////////////////////////////////
 #////////////////////////                REGISTER ROUTE                  //////////////////////////
 #//////////////////////////////////////////////////////////////////////////////////////////////////
-from werkzeug.security import generate_password_hash
 
 @app.route('/api/register', methods=['POST'])
 def register():
@@ -366,3 +358,4 @@ def logout():
 if __name__ == '__main__':
     port = int(os.getenv("PORT", "8000"))
     app.run(host='0.0.0.0', port=port)
+
