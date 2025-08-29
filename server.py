@@ -10,7 +10,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__, static_folder='static', static_url_path='')
 app.secret_key = os.getenv("SECRET_KEY", "dev-key")
 
-app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True)
+if os.getenv("ENV") == "prod":
+    app.config.update(
+        SESSION_COOKIE_SAMESITE="None",
+        SESSION_COOKIE_SECURE=True
+    )
 
 # Database path (use env if you add a Render Disk)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -358,4 +362,5 @@ def logout():
 if __name__ == '__main__':
     port = int(os.getenv("PORT", "8000"))
     app.run(host='0.0.0.0', port=port)
+
 
