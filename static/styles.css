@@ -46,6 +46,7 @@ h2 {
     display: block;
 }
 
+
 .top-bar {
     position: fixed;
     top: 0;
@@ -81,14 +82,21 @@ h2 {
     overflow: hidden;
 }
 
+.top-logo {
+  height: 28px;          /* adjust size */
+  margin-right: 10px;    /* space before "Home" text */
+}
+
 /*////////////////////////////////////////////////////////////////////////////////*/
 /*////////////////////////////         REGISTER          /////////////////////////*/
 /*////////////////////////////////////////////////////////////////////////////////*/
 #page-register {
   display: none;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;  /* align at the top */
+  align-items: center;          /* keep it centered horizontally */
   height: 100vh;
+  padding-top: 120px;  
 }
 
 #page-register input {
@@ -129,10 +137,13 @@ h2 {
 /*////////////////////////////           LOGIN           /////////////////////////*/
 /*////////////////////////////////////////////////////////////////////////////////*/
 #page-login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* align at the top */
+  align-items: center;          /* keep it centered horizontally */
+  height: 100vh;
+  padding-top: 120px;  
+
 }
 
 .login-box {
