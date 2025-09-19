@@ -6,8 +6,6 @@ from datetime import datetime, timezone
 from flask import Flask, request, jsonify, send_from_directory, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from dotenv import load_dotenv; 
-load_dotenv()
 
 app = Flask(__name__, static_folder='static', static_url_path='')
 app.secret_key = os.getenv("SECRET_KEY", "dev-key")
