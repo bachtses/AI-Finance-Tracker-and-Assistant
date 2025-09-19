@@ -12,7 +12,7 @@
 
 </head>
 <body>
-
+  
   <div id="page-register" class="page">
     <div class="login-box">
       <img src="images/site-logo.png" alt="Expensens Logo" class="login-logo">
@@ -43,7 +43,7 @@
   <div id="page1" class="page">
     <div class="container">
       <div class="top-bar">
-        <h1 class="top-bar-title">Home</h1>
+        <h1 class="top-bar-title"><img src="images/site-logo-home.png" alt="Expensens Logo" class="top-logo"></h1>
         <div class="user-menu">
           <i class="fa fa-user" onclick="toggleUserMenu()"></i>
           <div class="dropdown-content">
@@ -53,7 +53,7 @@
       </div>
       <div class="user-dialog-container">
         <h2 id="greeting"></h2>
-        <textarea id="userInput" placeholder="Use AI to enter your expenses here. &#10;You could say: I spent 420 euros on Pizza" rows="3" cols="50"></textarea>
+        <textarea id="userInput" placeholder="Use AI to enter your expenses here. &#10;You could say: I spent 42 euros on Pizza" rows="3" cols="50"></textarea>
         <div class="button-container">
           <button class="speak-btn" onclick="startVoiceInput()"><i class="fa fa-microphone" aria-hidden="true"></i> Voice</button>
           <button class="submit-btn" onclick="getExpensesFromChatGPT()">Submit</button>            
