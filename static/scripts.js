@@ -48,7 +48,7 @@ function registerUser() {
 
 function showRegister() {
   document.getElementById('login-form').style.display = 'none';
-  document.getElementById('page-register').style.display = 'block';
+  document.getElementById('page-register').style.display = 'flex';
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,9 +88,7 @@ async function login() {
     console.log("Login successful");
 
     const greetingEl = document.getElementById("greeting");
-    if (greetingEl && result.full_name) {
-    greetingEl.textContent = `Welcome, ${result.full_name.split(' ')[0]}!`;
-    }
+
 
     // Hide login and register pages
     document.getElementById('page-login').style.display = 'none';
@@ -105,8 +103,6 @@ async function login() {
     await fetchExpenses();
     const firstName = result.full_name.split(' ')[0];
     document.getElementById('greeting').innerHTML = `Hi ${firstName}!`;
-
-
 
 
   } else {
@@ -126,9 +122,10 @@ function showLogin() {
     const loginPage = document.getElementById('page-login');
     if (loginPage) {
         loginPage.style.display = 'flex';
-        loginPage.style.justifyContent = 'center';
+        loginPage.style.justifyContent = 'flex-start';
         loginPage.style.alignItems = 'center';
         loginPage.style.height = '100vh';
+        targetPage.style.paddingtop = '120px';
     }
 
     const registerPage = document.getElementById('page-register');
@@ -418,7 +415,7 @@ async function getExpensesFromChatGPT() {
         if (data.error) {
             console.error('Error:', data.error);
             userInput.value = '';  
-            userInput.placeholder = 'Expense added successfully! Add another one...';
+            userInput.placeholder = 'Expense added successfully! \nAdd another one...';
             userInput.classList.add('success-bg');  
             setTimeout(() => {
                 userInput.classList.add('fade-out'); 
@@ -864,9 +861,10 @@ function showPage(pageId) {
 
     // Restore login page flex centering
     if (pageId === 'page-login') {
-      targetPage.style.justifyContent = 'center';
+      targetPage.style.justifyContent = 'flex-start';
       targetPage.style.alignItems = 'center';
       targetPage.style.height = '100vh';
+      targetPage.style.paddingtop = '120px';
     }
   }
 
