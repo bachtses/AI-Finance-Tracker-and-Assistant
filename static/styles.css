@@ -146,6 +146,11 @@ h2 {
     font-family: 'Helvetica', Arial, sans-serif;
 }
 
+.login-logo {
+  width: 220px;           
+  margin-bottom: 100px;   
+}
+
 .login-box h2 {
     font-size: 22px;
     color: #333;
