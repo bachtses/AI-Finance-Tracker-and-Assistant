@@ -360,7 +360,9 @@ def logout():
 #////////////////////////                    __main__                    //////////////////////////
 #//////////////////////////////////////////////////////////////////////////////////////////////////
 if __name__ == '__main__':
-    port = int(os.getenv("PORT", "8000"))
-    app.run(host='0.0.0.0', port=port)
+    port = int(os.getenv("PORT", 5000))  # Render gives PORT, fallback 5000 locally
+    debug = os.getenv("DEBUG", "True") == "True"  # True locally, False online
+    host = "0.0.0.0" if os.getenv("PORT") else "127.0.0.1"  # 0.0.0.0 on Render, 127.0.0.1 locally
 
+    app.run(debug=debug, host=host, port=port)
 
