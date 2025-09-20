@@ -1,7 +1,39 @@
-# Environment
-.env
-
-# Python
+# Python cache / build
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
+*.pdb
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.envrc
+
+# Environment variables
+.env
+*.env
+
+# Databases (local SQLite)
+*.db
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+
+# Flask specific
+instance/
+*.pid
