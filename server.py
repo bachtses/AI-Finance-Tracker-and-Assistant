@@ -336,6 +336,7 @@ def login():
     password = data.get('password', '').strip()
     if not username or not password:
         return jsonify({'error': 'Username and password are required'}), 400
+    
     with sqlite3.connect(DATABASE) as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT id, full_name, password_hash FROM users WHERE username = ?", (username,))
@@ -343,7 +344,10 @@ def login():
 
     if not user or not check_password_hash(user[2], password):
         return jsonify({'error': 'Invalid username or password'}), 401
+
     session['user_id'] = user[0]
+    session.permanent = True   # 🔑 This ensures cookie gets an expiry date
+
     return jsonify({'status': 'success', 'message': 'Logged in', 'full_name': user[1]})
 
 
