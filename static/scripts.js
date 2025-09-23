@@ -521,7 +521,7 @@ function startVoiceInput() {
         isRecording = true;
 
         voiceButton.classList.add('recording'); 
-        voiceButton.innerHTML = '<i class="fa fa-stop"></i> Listening...';
+        voiceButton.innerHTML = '<i class="fa fa-stop"></i> ';
         recognition.onresult = event => {
             const transcript = event.results[0][0].transcript;
             document.getElementById('userInput').value = transcript;
@@ -557,7 +557,7 @@ function resetVoiceButton() {
     isRecording = false;
     const voiceButton = document.querySelector('.speak-btn');
     voiceButton.classList.remove('recording');
-    voiceButton.innerHTML = '<i class="fa fa-microphone"></i> Voice';
+    voiceButton.innerHTML = '<i class="fa fa-microphone"></i> ';
 }
     
 // Function to stop recording and reset UI
@@ -639,7 +639,7 @@ function updateCategoryChart(data) {
         labels.push('No Data');
         totals.push(0);
     }
-    const backgroundColors = ['#DCFFB7', '#FF6868', '#FFBB64', '#FFEAA7', '#A7E5FF'];
+    const backgroundColors = ['#A1B52D', '#9500F5', '#CFF500', '#7635A0', '#6D753B'];
 
     // Custom plugin to draw the anchor/callout lines
     const calloutLinesPlugin = {
