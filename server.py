@@ -5,6 +5,7 @@ import requests
 from datetime import datetime, timezone 
 from flask import Flask, request, jsonify, send_from_directory, session
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import timedelta
 
 
 app = Flask(__name__, static_folder='static', static_url_path='')
@@ -354,6 +355,15 @@ def logout():
     session.clear()
     return jsonify({'status': 'success', 'message': 'Logged out'})
 
+
+#//////////////////////////////////////////////////////////////////////////////////////////////////
+#////////////////////////           APP TO REMEMBER PASSWORD             //////////////////////////
+#//////////////////////////////////////////////////////////////////////////////////////////////////
+app.permanent_session_lifetime = timedelta(days=30)
+
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
 
 
 #//////////////////////////////////////////////////////////////////////////////////////////////////
