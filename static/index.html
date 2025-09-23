@@ -56,9 +56,9 @@
       </div>
       <div class="user-dialog-container">
         <h2 id="greeting"></h2>
-        <textarea id="userInput" placeholder="Use AI to enter your expenses here. &#10;You could say: I spent 42 euros on Pizza" rows="3" cols="50"></textarea>
+        <textarea id="userInput" placeholder="Enter your expenses here. &#10;For example: I spent 42 euros on Pizza. &#10;You can also use your voice." rows="3" cols="50"></textarea>
         <div class="button-container">
-          <button class="speak-btn" onclick="startVoiceInput()"><i class="fa fa-microphone" aria-hidden="true"></i> Voice</button>
+          <button class="speak-btn" onclick="startVoiceInput()"><i class="fa fa-microphone" aria-hidden="true"></i> </button>
           <button class="submit-btn" onclick="getExpensesFromChatGPT()">Submit</button>            
         </div>
       </div>
@@ -109,6 +109,7 @@
         <i class="fa fa-user" aria-hidden="true"></i>
     </div>
     <div class="container">
+      <div class="assistant-dialog-container">      
         <h2></h2>
         <textarea id="consultQuestion" placeholder="Use the AI assistant to explore your expenses, discover patterns, and get answers to questions. &#10;You could say: What are some saving tips based on my last 3 months?" rows="3"></textarea>
         <div class="button-container">
@@ -117,6 +118,7 @@
         <div id="consultResponse" class="wrapExpensesReport">
             <p></p>
         </div>
+      </div>
     </div>
   </div>
 
