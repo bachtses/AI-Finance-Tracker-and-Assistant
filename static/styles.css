@@ -1,8 +1,26 @@
 
 /* Fonts */
 @font-face {
-    font-family: 'Helvetica';
+    font-family: 'HelveticaCustom';
     src: url('/fonts/helvetica/Helvetica.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'HelveticaCustom';
+    src: url('/fonts/helvetica/Helvetica-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'HelveticaCustom';
+    src: url('/fonts/helvetica/Helvetica Black.otf') format('opentype');
+    font-weight: 900;   
+    font-style: normal;
+}
+@font-face {
+    font-family: 'HelveticaCustom';
+    src: url('/fonts/helvetica/Helvetica-Light.ttf') format('truetype');
+    font-weight: 300;
 }
 
 /* Color Pallette */
@@ -33,7 +51,7 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    font-family: 'Helvetica', Arial, sans-serif;
+    font-family: 'HelveticaCustom', 'Helvetica', Arial, sans-serif !important;
     line-height: 1.2;
     background-color: var(--color-light-gray);
     color: var(--color-light-black);
@@ -42,7 +60,27 @@ html, body {
 ::placeholder {
     color: var(--color-middle-gray); 
     opacity: 1;  
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.1px;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    font-family: 'HelveticaCustom', 'Helvetica', Arial, sans-serif !important;
+    -webkit-text-fill-color: var(--color-light-black) !important;
+    box-shadow: 0 0 0px 1000px var(--color-white) inset !important;
+    -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+}
+
+button:focus,
+.arrow-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent; /* optional */
+}
+
 
 h1 {
     text-align: center;
@@ -106,9 +144,11 @@ h2 {
 }
 
 .top-logo {
-  height: 28px;          /* adjust size */
-  margin-right: 10px;    /* space before "Home" text */
+  height: 28px;           
+  margin-right: 10px;     
 }
+
+
 
 /*////////////////////////////////////////////////////////////////////////////////*/
 /*////////////////////////////         REGISTER          /////////////////////////*/
@@ -177,7 +217,7 @@ h2 {
     width: 90%;
     max-width: 400px;
     text-align: center;
-    font-family: 'Helvetica', Arial, sans-serif;
+    font-family: 'HelveticaCustom';
 }
 
 .login-logo {
@@ -198,9 +238,11 @@ h2 {
 .login-box h1 {
     font-size: 46px;
     color: var(--color-light-black);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     text-align: left;
-    letter-spacing: 2.8px;
+    letter-spacing: 1px;
+    font-family: 'HelveticaCustom';
+    font-weight: 900;    
 }
 
 .login-box h2 {
@@ -214,7 +256,7 @@ h2 {
 .login-box h3 {
     font-size: 14px;
     color: var(--color-dark-gray);
-    margin-bottom: 44px;
+    margin-bottom: 36px;
     text-align: left;
     padding-right: 30px;
     font-weight: 500;
@@ -224,8 +266,8 @@ h2 {
 .login-box input[type="text"],
 .login-box input[type="password"] {
     width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 15px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
     border: 1.5px solid #ccc;
     border-radius: 30px;
     font-size: 16px;
@@ -237,15 +279,18 @@ h2 {
     font-weight: bold;
     color: var(--color-light-black);
     background-color: var(--color-lime);
-    padding: 12px 70px;
+    padding: 14px 70px;
+    width:100%;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     letter-spacing: 0.5px;
+    margin-top: 15px;
 }
 
 .login-box button:hover {
-    background-color: var(--color-dark-gray);
+    background-color: var(--color-light-black);
+    color: var(--color-light-gray);
 }
 
 .login-box p {
@@ -276,11 +321,7 @@ input:focus, textarea:focus {
     -webkit-box-shadow: none;
 }
 
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
-    -webkit-text-fill-color: var(--color-light-black) !important;
-    
-}
+
 
 /*////////////////////////////////////////////////////////////////////////////////*/
 /*////////////////////////////       MENU (top)        /////////////////////////*/
@@ -361,7 +402,7 @@ input:-webkit-autofill {
 }
 
 .menu-bar button i {
-    color: var(--color-dark-gray);
+    color: var(--color-light-black);
     font-size: 22px;
 }
 
@@ -385,14 +426,14 @@ input:-webkit-autofill {
 /*////////////////////////////         PAGE 1          ///////////////////////////*/
 /*////////////////////////////////////////////////////////////////////////////////*/
 #greeting {
-    font-family: 'Helvetica', Arial, sans-serif;
+    font-family: 'HelveticaCustom';
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 900;
     color: var(--color-light-black);
-    padding: 30px 15px 0 0;
+    padding: 8px 15px 0 0;
     margin-bottom: 30px;
     text-align: left;
-    letter-spacing: 1px;
+    letter-spacing: 0px;
 
 }
 
@@ -420,7 +461,7 @@ textarea {
 
 
 #userInput {
-    font-family: 'Helvetica', Arial, sans-serif;
+    font-family: 'HelveticaCustom';
     font-size: 16px;
     padding-top: 20px;
     padding-bottom: 30px;
@@ -449,10 +490,9 @@ textarea {
 
 
 .button-container {
-    width: auto;
     display: flex;
     gap: 0px;  
-    justify-content: center;
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 30px;
 }
@@ -462,9 +502,9 @@ textarea {
     font-size: 16px;
     font-weight: bold;
     color: var(--color-light-black);
-    background-color: var(--color-lime);
-    width: auto;
-    padding: 12px 25px;
+    background-color: var(--color-light-gray);
+    flex: 2;
+    padding: 12px 40px;
     border: 1px solid #ccc;
     border-radius: 30px;
     cursor: pointer;
@@ -477,6 +517,7 @@ textarea {
 .speak-btn.recording {
     background-color: var(--color-light-black) !important;
     color: var(--color-light-gray) !important;
+    font-size: 16px;
 }
 
 
@@ -485,7 +526,7 @@ textarea {
     font-weight: bold;
     color: var(--color-light-black);
     background-color: var(--color-lime);
-    width: auto;
+    flex: 8;
     padding: 12px 60px;
     border: 1px solid #ccc;
     border-radius: 30px;
@@ -502,8 +543,8 @@ textarea {
 .submit-btn:focus {
     outline: none !important;
     box-shadow: none !important;
-    background-color: var(--color-light-gray) !important;
-    color: rgb(159, 159, 159)!important;
+    background-color: var(--color-light-black) !important;
+    color: var(--color-light-gray)!important;
     border: 1px solid rgb(204, 204, 204)!important;
 }
 
@@ -534,10 +575,10 @@ margin-left: auto;
 .arrow-btn {
     font-size: 14px;
     font-weight: bold;
-    color: var(--color-dark-gray);
+    color: var(--color-light-black);
     background-color: var(--color-light-gray);
     width: auto;
-    padding: 11px 26px;
+    padding: 12px 40px;
     border: 1px solid #ccc;
     border-radius: 30px;
     cursor: pointer;
@@ -549,6 +590,8 @@ margin-left: auto;
     -ms-user-select: none;
     user-select: none;
 }
+
+
 
 #expenseTable {
     flex-grow: 1; /* Expands to fill available space */
@@ -706,7 +749,7 @@ margin-left: auto;
 
 
 .expense-name {
-    font-family: 'Helvetica', Arial, sans-serif;
+    font-family: 'HelveticaCustom';
     font-size: 14px;
     font-weight: 100;
     letter-spacing: 0.5px;
@@ -724,7 +767,7 @@ margin-left: auto;
     font-size: 14px;
     font-weight: 100;
     letter-spacing: 0.5px;
-    color: var(--color-lime);
+    color: var(--color-light-black);
 }
 
 .expense-date {
@@ -832,7 +875,7 @@ margin-left: auto;
     font-size: 14px;
     font-weight: 100;
     letter-spacing: 0.5px;
-    color: #ea4040;
+    color: var(--color-light-black);
 }
 
 .progress {
@@ -859,8 +902,17 @@ margin-left: auto;
 /*////////////////////////////////////////////////////////////////////////////////*/
 /*////////////////////////////         PAGE 3          ///////////////////////////*/
 /*////////////////////////////////////////////////////////////////////////////////*/
+.assistant-dialog-container {
+    height: auto;
+    width: 100%;
+    flex-shrink: 0;
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 #page3 h2 {
-    font-family: 'Helvetica', Arial, sans-serif;
+    font-family: 'HelveticaCustom';
     font-size: 15px;
     font-weight: 500;
     padding-bottom: 0px;
@@ -878,7 +930,7 @@ margin-left: auto;
 }
 
 #consultQuestion {
-    font-family: 'Helvetica', Arial, sans-serif;
+    font-family: 'HelveticaCustom';
     font-size: 15px;
     padding-top: 20px;
     padding-bottom: 60px;
@@ -922,7 +974,7 @@ margin-left: auto;
 }
 
 .wrapExpensesReport h2 {
-    font-family: 'Helvetica', Arial, sans-serif;
+    font-family: 'HelveticaCustom';
     font-size: 15px;
     padding-top: 30px;
     padding-bottom: 30px;
