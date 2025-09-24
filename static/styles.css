@@ -34,8 +34,8 @@
     --color-white: #FFFFFF;
 
 
-    --color-error: #ea4040;
-    --color-success: #06b606;
+    --color-red: #ea4040;
+    --color-green: #06b606;
 }
 
 * {
@@ -120,6 +120,8 @@ h2 {
     padding: 14px 0;
     padding-left: 15px;
     padding-right: 15px;
+    z-index: 1;
+    background-color: var(--color-light-gray);
 }
 
 .top-bar-title {
@@ -137,9 +139,9 @@ h2 {
 .container {
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Full viewport height */
+    height: 100vh; 
     padding: 10px;
-    padding-bottom: 60px; /* Reserve space for the menu bar */
+    padding-bottom: 60px;  
     overflow: hidden;
 }
 
@@ -164,7 +166,7 @@ h2 {
 
 #page-register input {
     width: 100%;
-    padding: 12px 15px;
+    padding: 18px 15px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 30px;
@@ -177,17 +179,22 @@ h2 {
     font-weight: bold;
     color: var(--color-light-black);
     background-color: var(--color-lime);
-    padding: 12px 70px;
+    padding: 18px 70px;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     letter-spacing: 0.5px;
 }
 
+#page-register button:hover {
+    background-color: var(--color-light-black);
+    color: var(--color-light-gray);
+}
+
 .success-message {
-    color: rgb(6, 182, 6);
+    color: var(--color-green);
     background-color: var(--color-light-gray);
-    border: 1px solid rgb(12, 190, 12);
+    border: 1px solid var(--color-green);
     padding: 8px 12px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -266,7 +273,7 @@ h2 {
 .login-box input[type="text"],
 .login-box input[type="password"] {
     width: 100%;
-    padding: 14px 18px;
+    padding: 18px 18px;
     margin-bottom: 10px;
     border: 1.5px solid #ccc;
     border-radius: 30px;
@@ -279,7 +286,7 @@ h2 {
     font-weight: bold;
     color: var(--color-light-black);
     background-color: var(--color-lime);
-    padding: 14px 70px;
+    padding: 18px 70px;
     width:100%;
     border: none;
     border-radius: 30px;
@@ -455,7 +462,7 @@ textarea {
     color: var(--color-light-black);
     padding: 15px;
     margin: 2px auto;
-    margin-top: 20px;
+    margin-top: 2px;
     display: block;
 }
 
@@ -504,7 +511,7 @@ textarea {
     color: var(--color-light-black);
     background-color: var(--color-light-gray);
     flex: 2;
-    padding: 12px 40px;
+    padding: 18px 40px;
     border: 1px solid #ccc;
     border-radius: 30px;
     cursor: pointer;
@@ -520,6 +527,20 @@ textarea {
     font-size: 16px;
 }
 
+.speak-btn i {
+  transition: color 0.3s;
+}
+
+.speak-btn.recording i {
+  color: var(--color-red);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%   { opacity: 1;   transform: scale(1); }
+  50%  { opacity: 0.5; transform: scale(1.2); }
+  100% { opacity: 1;   transform: scale(1); }
+}
 
 .submit-btn {
     font-size: 16px;
@@ -527,7 +548,7 @@ textarea {
     color: var(--color-light-black);
     background-color: var(--color-lime);
     flex: 8;
-    padding: 12px 60px;
+    padding: 18px 60px;
     border: 1px solid #ccc;
     border-radius: 30px;
     cursor: pointer;
@@ -578,7 +599,7 @@ margin-left: auto;
     color: var(--color-light-black);
     background-color: var(--color-light-gray);
     width: auto;
-    padding: 12px 40px;
+    padding: 18px 40px;
     border: 1px solid #ccc;
     border-radius: 30px;
     cursor: pointer;
@@ -902,14 +923,6 @@ margin-left: auto;
 /*////////////////////////////////////////////////////////////////////////////////*/
 /*////////////////////////////         PAGE 3          ///////////////////////////*/
 /*////////////////////////////////////////////////////////////////////////////////*/
-.assistant-dialog-container {
-    height: auto;
-    width: 100%;
-    flex-shrink: 0;
-    overflow: hidden;
-    padding: 10px;
-    box-sizing: border-box;
-}
 
 #page3 h2 {
     font-family: 'HelveticaCustom';
@@ -929,86 +942,91 @@ margin-left: auto;
     line-height: 1.3;
 }
 
-#consultQuestion {
-    font-family: 'HelveticaCustom';
-    font-size: 15px;
-    padding-top: 20px;
-    padding-bottom: 60px;
-    color: var(--color-light-black);
-    letter-spacing: 0.5px;
-    line-height: 1.3;
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f9f9f9;
 }
 
-#generateReportButton {
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--color-dark-gray);
-    background-color: var(--color-light-gray);
-    width: auto;
-    padding: 11px 26px;
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    cursor: pointer;
-    margin: 5px auto;
-    margin-top: 20px;
-    letter-spacing: 0.2px;
-    outline: none;
-    box-shadow: none;
-    display: block;
-    text-align: center;
+.chat-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 180px;    
+  scroll-behavior: smooth;  
 }
 
-.wrapExpensesReport {
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-top: 0px;
-    font-size: 16px;
-    color: var(--color-light-black);
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: none;
+.chat-input-area {
+  display: flex;
+  padding: 10px;
+  background: white;
+  border-top: 1px solid #ddd;
+  position: fixed;     
+  bottom: 70px;       
+  left: 0;
+  right: 0;
+  z-index: 20;
 }
 
-.wrapExpensesReport h2 {
-    font-family: 'HelveticaCustom';
-    font-size: 15px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    color: var(--color-dark-gray);
-    letter-spacing: 0.2px;
-    text-align: center;
+.chat-input-area input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  resize: none;          /* prevent manual resize */
+  overflow: hidden;      /* hide scrollbars */
+  min-height: 40px;      /* base height */
+  max-height: 120px;     /* optional: prevent it from taking over the screen */
+  font-family: inherit;
+  font-size: 15px;
 }
 
-.wrapExpensesReport p {
-    font-size: 15px;
-    color: var(--color-dark-gray);
-    text-align: justify;
-    line-height: 1.3;
+.chat-input-area button {
+  margin-left: 10px;
+  background: #CFF500;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#readItButton {
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--color-dark-gray);
-    background-color: var(--color-light-gray);
-    width: auto;
-    padding: 11px 26px;
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    cursor: pointer;
-    margin: 5px auto;
-    letter-spacing: 0.2px;
-    outline: none;
-    box-shadow: none;
-    display: block;
-    text-align: center;
 
+.message {
+  max-width: 75%;
+  padding: 10px 14px;
+  margin: 8px 0;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1.4;
 }
 
+.user-message {
+  background: #CFF500;  /* neon green */
+  color: #333;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.assistant-message {
+  background: #e0e0e0;
+  color: #111;
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+}
+
+.typing {
+  opacity: 0.7;
+  font-style: italic;
+}
 
 
 

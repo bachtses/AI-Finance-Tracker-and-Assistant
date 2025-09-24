@@ -103,22 +103,21 @@
     </div>
   </div>
 
-  <div id="page3" class="page">
+  <div id="page3" class="chat-page" style="display: none;">
     <div class="top-bar">
-        <h1 class="top-bar-title">Assistant</h1>
-        <i class="fa fa-user" aria-hidden="true"></i>
+      <h1 class="top-bar-title">AI Assistant</h1>
+      <i class="fa fa-user" aria-hidden="true"></i>
     </div>
-    <div class="container">
-      <div class="assistant-dialog-container">      
-        <h2></h2>
-        <textarea id="consultQuestion" placeholder="Use the AI assistant to explore your expenses, discover patterns, and get answers to questions. &#10;You could say: What are some saving tips based on my last 3 months?" rows="3"></textarea>
-        <div class="button-container">
-            <button class="submit-btn" onclick="sendConsultQuestion()">Ask AI</button>
-        </div>
-        <div id="consultResponse" class="wrapExpensesReport">
-            <p></p>
-        </div>
-      </div>
+    <div class="chat-container" id="chat-container">
+      <div class="message assistant-message">👋 Hello, I’m your assistant.</div>
+      <div class="message user-message">Hi there!</div>
+    </div>
+
+    <div class="chat-input-area">
+      <textarea id="chatInput" placeholder="Ask me anything about your expenses..."></textarea>
+      <button onclick="sendMessage()">
+        <i class="fa fa-paper-plane"></i>
+      </button>
     </div>
   </div>
 

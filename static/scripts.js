@@ -512,7 +512,7 @@ function startVoiceInput() {
         resetVoiceButton();
         return;
     }
-    
+
     try {
         recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         recognition.lang = 'en-US';
@@ -520,21 +520,20 @@ function startVoiceInput() {
         recognition.start();
         isRecording = true;
 
+        // 🔽 Instead of changing icon, just add the class
         voiceButton.classList.add('recording'); 
-        voiceButton.innerHTML = '<i class="fa fa-stop"></i> ';
+
         recognition.onresult = event => {
             const transcript = event.results[0][0].transcript;
             document.getElementById('userInput').value = transcript;
             console.log('Voice input:', transcript);
         };
+
         recognition.onerror = event => {
-            if (event.error === 'not-allowed') {
-                alert('Microphone access is blocked. Please allow it in your browser settings.');
-            } else {
-                console.error('Speech recognition error:', event.error);
-            }
+            console.error('Speech recognition error:', event.error);
             resetVoiceButton();
         };
+
         recognition.onend = () => {
             resetVoiceButton();
             const userInput = document.getElementById('userInput').value.trim();
@@ -544,10 +543,10 @@ function startVoiceInput() {
         };
     } catch (err) {
         console.error('Speech Recognition API not supported:', err);
-        alert('Your browser does not support Speech Recognition. Try using Google Chrome.');
         resetVoiceButton();
     }
 }
+
     
 // Reset button style when recording stops
 function resetVoiceButton() {
@@ -567,7 +566,7 @@ function stopRecording() {
     }
     removeRecordingNotification();
     isRecording = false;
-    document.querySelector('.speak-btn').innerHTML = '<i class="fa fa-microphone"></i> Voice';
+    document.querySelector('.speak-btn').innerHTML = '<i class="fa fa-microphone"></i>';
 }
     
 // Function to remove the recording notification
@@ -838,6 +837,79 @@ function readReport() {
         alert("Sorry, your browser does not support speech synthesis.");
     }
 }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////                 CHAT ASSISTANT (PAGE 3)           ////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+async function sendMessage() {
+  const inputEl = document.getElementById("chatInput");
+  const message = inputEl.value.trim();
+  if (!message) return;
+
+  // Add user message
+  addMessage(message, "user-message");
+  inputEl.value = "";
+
+  // Typing indicator
+  const typingId = addMessage("Assistant is typing...", "assistant-message typing");
+
+  try {
+    const response = await fetch('/api/wrap-up', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ userInputForConsult: message })
+    });
+
+    const data = await response.json();
+
+    // Remove typing indicator
+    removeMessage(typingId);
+
+    if (data.response) {
+      addMessage(data.response, "assistant-message");
+    } else {
+      addMessage("⚠️ " + (data.error || "No response from assistant."), "assistant-message");
+    }
+  } catch (err) {
+    removeMessage(typingId);
+    addMessage("❌ Error connecting to assistant.", "assistant-message");
+    console.error(err);
+  }
+}
+
+function addMessage(text, className) {
+  const container = document.getElementById("chat-container");
+  const msgEl = document.createElement("div");
+  msgEl.className = "message " + className;
+  msgEl.textContent = text;
+  container.appendChild(msgEl);
+
+  // Scroll to bottom
+  container.scrollTop = container.scrollHeight;
+
+  return msgEl; // return element for reference (e.g., typing)
+}
+
+function removeMessage(msgEl) {
+  if (msgEl && msgEl.remove) {
+    msgEl.remove();
+  }
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const chatInput = document.getElementById("chatInput");
+
+  chatInput.addEventListener("input", () => {
+    chatInput.style.height = "auto"; // reset
+    chatInput.style.height = chatInput.scrollHeight + "px"; // adjust
+  });
+});
+
+
     
 //////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////                      MENU                      //////////////////////////
