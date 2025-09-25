@@ -8,18 +8,18 @@
 }
 @font-face {
     font-family: 'HelveticaCustom';
-    src: url('/fonts/helvetica/Helvetica-Bold.ttf') format('truetype');
-    font-weight: bold;
-}
-@font-face {
-    font-family: 'HelveticaCustom';
-    src: url('/fonts/helvetica/Helvetica Black.otf') format('opentype');
+    src: url('/fonts/helvetica/helvetica black.otf') format('opentype');
     font-weight: 900;   
     font-style: normal;
 }
 @font-face {
     font-family: 'HelveticaCustom';
-    src: url('/fonts/helvetica/Helvetica-Light.ttf') format('truetype');
+    src: url('/fonts/helvetica/Helvetica-Bold.ttf') format('truetype');
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'HelveticaCustom';
+    src: url('/fonts/helvetica/helvetica-light.ttf') format('truetype');
     font-weight: 300;
 }
 
@@ -178,7 +178,7 @@ h2 {
 
 #page-register button {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--color-light-black);
     background-color: var(--color-lime);
     padding: 18px 70px;
@@ -275,7 +275,7 @@ h2 {
 .login-box input[type="text"],
 .login-box input[type="password"] {
     width: 100%;
-    padding: 18px 18px;
+    padding: 16px 18px;
     margin-bottom: 10px;
     border: 1.5px solid #ccc;
     border-radius: 30px;
@@ -285,10 +285,10 @@ h2 {
 
 .login-box button {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--color-light-black);
     background-color: var(--color-lime);
-    padding: 18px 70px;
+    padding: 16px 70px;
     width:100%;
     border: none;
     border-radius: 30px;
@@ -310,7 +310,7 @@ h2 {
 
 .login-box a {
     color: var(--color-light-black);
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: none;
     font-size: 14px;
     letter-spacing: 0.5px;
@@ -416,7 +416,7 @@ input:focus, textarea:focus {
 }
 
 .menu-bar button.active {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .menu-bar button.active i {
@@ -424,7 +424,7 @@ input:focus, textarea:focus {
 }
 
 .menu-bar button.active .menu-text {
-    font-weight: bold;
+    font-weight: 600;
     color: var(--color-light-black);
 }
 
@@ -509,11 +509,11 @@ textarea {
 
 .speak-btn {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--color-light-black);
     background-color: var(--color-light-gray);
     flex: 2;
-    padding: 16px 40px;
+    padding: 14px 40px;
     border: 1px solid #ccc;
     border-radius: 30px;
     cursor: pointer;
@@ -546,11 +546,11 @@ textarea {
 
 .submit-btn {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--color-light-black);
     background-color: var(--color-lime);
     flex: 8;
-    padding: 16px 60px;
+    padding: 14px 60px;
     border: 1px solid #ccc;
     border-radius: 30px;
     cursor: pointer;
@@ -597,11 +597,11 @@ margin-left: auto;
 
 .arrow-btn {
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--color-light-black);
     background-color: var(--color-light-gray);
     width: auto;
-    padding: 16px 40px;
+    padding: 14px 40px;
     border: 1px solid #ccc;
     border-radius: 30px;
     cursor: pointer;
@@ -689,7 +689,7 @@ margin-left: auto;
 
 .day-number {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 900;
     color: var(--color-light-black);
     background-color: transparent;
     padding: 10px 15px;
@@ -788,7 +788,6 @@ margin-left: auto;
 
 .expense-amount {
     font-size: 14px;
-    font-weight: 100;
     letter-spacing: 0.5px;
     color: var(--color-light-black);
 }
@@ -965,6 +964,7 @@ margin-left: auto;
 .chat-input-area {
   display: flex;
   padding: 10px;
+  padding-bottom: 20px;
   background: var(--color-light-gray);
   border-top: 1px solid #ddd;
   position: fixed;     
@@ -993,7 +993,7 @@ margin-left: auto;
   background: var(--color-lime);
   border: none;
   border-radius: 50%;
-  width: 42px;
+  width: 50px;
   height: 42px;
   cursor: pointer;
   display: flex;
