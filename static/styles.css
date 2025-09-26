@@ -60,11 +60,11 @@ html, body {
 input::placeholder,
 textarea::placeholder {
     font-family: 'HelveticaCustom';
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
+    font-size: 14px;
+    font-weight: normal;
+    
     color: var(--color-middle-gray);
-    opacity: 1;
+    opacity: 0.5;
 }
 
 input:-webkit-autofill,
@@ -275,16 +275,16 @@ h2 {
 .login-box input[type="text"],
 .login-box input[type="password"] {
     width: 100%;
-    padding: 16px 18px;
+    padding: 14px 18px;
     margin-bottom: 10px;
-    border: 1.5px solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 30px;
-    font-size: 16px;
+    font-size: 15px;
     color: var(--color-light-black);
 }
 
 .login-box button {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--color-light-black);
     background-color: var(--color-lime);
@@ -460,7 +460,7 @@ textarea {
     border-radius: 30px;
     resize: vertical;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 15px;
     color: var(--color-light-black);
     padding: 15px;
     margin: 2px auto;
@@ -508,7 +508,7 @@ textarea {
 
 
 .speak-btn {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--color-light-black);
     background-color: var(--color-light-gray);
@@ -545,7 +545,7 @@ textarea {
 }
 
 .submit-btn {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--color-light-black);
     background-color: var(--color-lime);
@@ -583,7 +583,7 @@ textarea {
     padding: 0 10px;
     padding-top: 10px;
     gap:8px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
   }
   
 #currentMonthDisplay {
@@ -596,7 +596,7 @@ margin-left: auto;
 
 
 .arrow-btn {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--color-light-black);
     background-color: var(--color-light-gray);
@@ -688,11 +688,11 @@ margin-left: auto;
 }
 
 .day-number {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: 900;
     color: var(--color-light-black);
     background-color: transparent;
-    padding: 10px 15px;
+    padding: 0px 15px;
     border-radius: 8px;
     text-align: center;
     min-width: 50px;
@@ -706,8 +706,8 @@ margin-left: auto;
 }
 
 .day-name {
-    font-size: 16px;
-    font-weight: 100;
+    font-size: 15px;
+    font-weight: 600;
     color: var(--color-light-black);
     letter-spacing: 0.5px;
 }
@@ -849,8 +849,8 @@ margin-left: auto;
 .category-bars-title {
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
-    font-weight: 100;
+    font-size: 15px;
+    font-weight: normal;
     color: var(--color-light-black);
     letter-spacing: 0.5px;
     padding: 10px 15px;
@@ -990,6 +990,7 @@ margin-left: auto;
 
 .chat-input-area button {
   margin-left: 10px;
+  margin-top: 15px;
   background: var(--color-lime);
   border: none;
   border-radius: 50%;
@@ -1003,12 +1004,12 @@ margin-left: auto;
 
 
 .message {
-  max-width: 75%;
-  padding: 10px 14px;
-  margin: 8px 0;
-  border-radius: 12px;
-  font-size: 16px;
-  line-height: 1.4;
+    font-size: 15px;
+    max-width: 75%;
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 12px;
+    line-height: 1.4;
 }
 
 .user-message {
