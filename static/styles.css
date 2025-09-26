@@ -17,11 +17,6 @@
     src: url('/fonts/helvetica/Helvetica-Bold.ttf') format('truetype');
     font-weight: 600;
 }
-@font-face {
-    font-family: 'HelveticaCustom';
-    src: url('/fonts/helvetica/helvetica-light.ttf') format('truetype');
-    font-weight: 300;
-}
 
 /* Color Pallette */
 :root {
@@ -60,9 +55,9 @@ html, body {
 input::placeholder,
 textarea::placeholder {
     font-family: 'HelveticaCustom';
-    font-size: 14px;
+    font-size: 15px;
+    letter-spacing: 0.5px;
     font-weight: normal;
-    
     color: var(--color-middle-gray);
     opacity: 0.5;
 }
@@ -127,15 +122,15 @@ h2 {
 }
 
 .top-bar-title {
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 30px;
+    font-weight: 900;
     color: var(--color-light-black);
     letter-spacing: 0.5px;
 }
 
 .top-bar .fa-user {
-    font-size: 24px; 
-    color: var(--color-light-black);
+    font-size: 30px; 
+    color: var(--color-middle-gray);
 }
 
 .container {
@@ -148,7 +143,7 @@ h2 {
 }
 
 .top-logo {
-  height: 28px;           
+  height: 30px;           
   margin-right: 10px;     
 }
 
@@ -172,12 +167,12 @@ h2 {
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 30px;
-    font-size: 16px;
+    font-size: 15px;
     color: var(--color-light-black);
 }
 
 #page-register button {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--color-light-black);
     background-color: var(--color-lime);
@@ -201,7 +196,7 @@ h2 {
     margin-bottom: 10px;
     border-radius: 5px;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 
@@ -230,7 +225,7 @@ h2 {
 }
 
 .login-logo {
-    width: 46px;           
+    width: 65px;           
     margin-bottom: 4px;   
     display: block;    
     margin-left: 0;
@@ -239,7 +234,7 @@ h2 {
 .login-box h4 {
     font-size: 15px;
     color: var(--color-light-black);
-    margin-bottom: 76px;
+    margin-bottom: 60px;
     text-align: left;
     letter-spacing: 0.5px;
 }
@@ -247,9 +242,9 @@ h2 {
 .login-box h1 {
     font-size: 46px;
     color: var(--color-light-black);
-    margin-bottom: 6px;
+    margin-bottom: 2px;
     text-align: left;
-    letter-spacing: 1px;
+    letter-spacing: 0.6px;
     font-family: 'HelveticaCustom';
     font-weight: 900;    
 }
@@ -280,7 +275,9 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 30px;
     font-size: 15px;
+    letter-spacing: 0.5px;
     color: var(--color-light-black);
+    font-weight: normal;
 }
 
 .login-box button {
@@ -406,25 +403,19 @@ input:focus, textarea:focus {
 .menu-text {
     font-size: 14px;
     color: var(--color-dark-gray);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.2px;
 }
 
 .menu-bar button i {
-    color: var(--color-light-black);
+    color: var(--color-dark-gray);
     font-size: 22px;
+    transition: all 0.3s ease;
 }
 
-.menu-bar button.active {
-    font-weight: 600;
-}
 
-.menu-bar button.active i {
-    color: var(--color-light-black);
-}
-
+.menu-bar button.active i,
 .menu-bar button.active .menu-text {
-    font-weight: 600;
     color: var(--color-light-black);
 }
 
@@ -456,27 +447,30 @@ input:focus, textarea:focus {
 
 textarea {
     width: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-middle-gray);
     border-radius: 30px;
     resize: vertical;
     box-sizing: border-box;
-    font-size: 15px;
-    color: var(--color-light-black);
     padding: 15px;
     margin: 2px auto;
     margin-top: 2px;
     display: block;
+    font-family: 'HelveticaCustom';
+    font-size: 15px;
+    color: var(--color-light-black);
+    letter-spacing: 0.5px;
+    line-height: 1.2;
 }
 
 
 #userInput {
     font-family: 'HelveticaCustom';
-    font-size: 16px;
+    font-size: 15px;
     padding-top: 20px;
-    padding-bottom: 30px;
+    padding-bottom: 15px;
     color: var(--color-light-black);
     letter-spacing: 0.5px;
-    line-height: 1.3;
+    line-height: 1.2;
 }
 
 
@@ -503,7 +497,7 @@ textarea {
     gap: 0px;  
     width: 100%;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 
@@ -584,6 +578,10 @@ textarea {
     padding-top: 10px;
     gap:8px;
     margin-bottom: 0px;
+    font-size: 15px;
+    color: var(--color-light-black);
+    letter-spacing: 0.5px;
+    
   }
   
 #currentMonthDisplay {
@@ -601,7 +599,7 @@ margin-left: auto;
     color: var(--color-light-black);
     background-color: var(--color-light-gray);
     width: auto;
-    padding: 14px 40px;
+    padding: 14px 30px;
     border: 1px solid #ccc;
     border-radius: 30px;
     cursor: pointer;
@@ -688,7 +686,7 @@ margin-left: auto;
 }
 
 .day-number {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 900;
     color: var(--color-light-black);
     background-color: transparent;
@@ -842,7 +840,8 @@ margin-left: auto;
     height: auto !important;
     display: block;
     margin: 0 auto;
-    padding: 0 12px;
+    margin-top: -50px;
+    padding: 0;
 }
 
 
@@ -854,7 +853,7 @@ margin-left: auto;
     color: var(--color-light-black);
     letter-spacing: 0.5px;
     padding: 10px 15px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--color-middle-gray);
     margin-top: 0px;
     width:100%;
 }
@@ -903,7 +902,7 @@ margin-left: auto;
 .progress {
     background-color: var(--color-light-gray);
     height: 8px;
-    border-radius: 1px !important;
+    border-radius: 30px !important;
     width: 100%;
     position: relative;
 }
@@ -1004,32 +1003,40 @@ margin-left: auto;
 
 
 .message {
-    font-size: 15px;
     max-width: 75%;
     padding: 10px 14px;
     margin: 8px 0;
     border-radius: 12px;
-    line-height: 1.4;
+    font-family: 'HelveticaCustom';
+    font-size: 15px;
+    color: var(--color-light-black);
+    letter-spacing: 0.5px;
+    line-height: 1.2;
 }
 
 .user-message {
-  background: var(--color-middle-gray);
-  color: var(--color-light-black);
-  margin-left: auto;
-  border-bottom-right-radius: 4px;
+    background: var(--color-lime);
+    color: var(--color-light-black);
+    margin-left: auto;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
-.assistant-message {
-  
-  background: var(--color-lime);
-  color: var(--color-light-black);
-  margin-right: auto;
-  border-bottom-left-radius: 4px;
+.assistant-message { 
+    background: var(--color-middle-gray);
+    color: var(--color-light-black);
+    margin-right: auto;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 
 .typing {
-  opacity: 0.7;
-  font-style: italic;
+    opacity: 0.7;
+    font-style: italic;
 }
 
 

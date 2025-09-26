@@ -702,8 +702,8 @@ function updateCategoryChart(data) {
                 padding: {
                     top: 30,
                     bottom: 0,
-                    left: 80,   
-                    right: 80   
+                    left: 102,   
+                    right: 102   
                 }
             },
             plugins: {
@@ -712,10 +712,11 @@ function updateCategoryChart(data) {
                 },
                 datalabels: {
                     color: '#333',
-                    font: { size: 14, weight: '500' },
+                    font: { size: 14, weight: 'normal' },
                     anchor: 'end',
                     align: 'end',
                     offset: 20,
+                    clip: false,
                     formatter: (value, context) => {
                         const percentage = (value / totalSum) * 100;
                         return percentage >= 3 ? context.chart.data.labels[context.dataIndex] : '';
@@ -946,5 +947,20 @@ function showPage(pageId) {
   } else {
     menuBar.style.display = 'none';
   }
+
+
+    // Highlight active menu button
+  const buttons = document.querySelectorAll('#menu-bar button');
+  buttons.forEach(btn => btn.classList.remove('active'));
+
+  if (pageId === 'page1') {
+    document.querySelector('#menu-bar button:nth-child(1)')?.classList.add('active');
+  } else if (pageId === 'page2') {
+    document.querySelector('#menu-bar button:nth-child(2)')?.classList.add('active');
+  } else if (pageId === 'page3') {
+    document.querySelector('#menu-bar button:nth-child(3)')?.classList.add('active');
+  }
+
+
 }
 
