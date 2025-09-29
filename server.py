@@ -7,6 +7,7 @@ from flask import Flask, request, jsonify, send_from_directory, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
 import re
+import secrets
 
 
 app = Flask(__name__, static_folder='static', static_url_path='')
@@ -49,7 +50,8 @@ def init_db():
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 full_name TEXT NOT NULL,
                 username TEXT UNIQUE NOT NULL,
-                password_hash TEXT NOT NULL
+                password_hash TEXT NOT NULL,
+                auth_token TEXT
             )
         """)
         c.execute("""
@@ -350,23 +352,48 @@ def register():
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
-    username = data.get('username', '').strip()
-    password = data.get('password', '').strip()
-    if not username or not password:
-        return jsonify({'error': 'Username and password are required'}), 400
-    
+    username = data.get('username')
+    password = data.get('password')
+
     with sqlite3.connect(DATABASE) as conn:
         cursor = conn.cursor()
-        cursor.execute("SELECT id, full_name, password_hash FROM users WHERE username = ?", (username,))
-        user = cursor.fetchone()
+        cursor.execute("SELECT id, password_hash, full_name FROM users WHERE username = ?", (username,))
+        row = cursor.fetchone()
+        if row and check_password_hash(row[1], password):
+            user_id = row[0]
+            full_name = row[2]
 
-    if not user or not check_password_hash(user[2], password):
-        return jsonify({'error': 'Invalid username or password'}), 401
+            # 🔑 Generate persistent token
+            token = secrets.token_hex(32)
+            cursor.execute("UPDATE users SET auth_token=? WHERE id=?", (token, user_id))
+            conn.commit()
 
-    session['user_id'] = user[0]
-    session.permanent = True   # 🔑 This ensures cookie gets an expiry date
+            # Keep session for normal browser
+            session['user_id'] = user_id
 
-    return jsonify({'status': 'success', 'message': 'Logged in', 'full_name': user[1]})
+            return jsonify({"status": "success", "full_name": full_name, "token": token})
+        else:
+            return jsonify({"status": "fail", "error": "Invalid username or password"}), 401
+
+
+#//////////////////////////////////////////////////////////////////////////////////////////////////
+#////////////////////////              STAY LOGGED IN ROUTE              //////////////////////////
+#//////////////////////////////////////////////////////////////////////////////////////////////////
+@app.route('/api/auto-login', methods=['POST'])
+def auto_login():
+    data = request.get_json()
+    token = data.get('token')
+
+    with sqlite3.connect(DATABASE) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, full_name FROM users WHERE auth_token=?", (token,))
+        row = cursor.fetchone()
+        if row:
+            session['user_id'] = row[0]
+            return jsonify({"status": "success", "full_name": row[1]})
+        else:
+            return jsonify({"status": "fail"}), 401
+
 
 
 #//////////////////////////////////////////////////////////////////////////////////////////////////
