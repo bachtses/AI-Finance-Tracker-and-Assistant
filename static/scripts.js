@@ -400,9 +400,7 @@ async function getExpensesFromChatGPT() {
     }
     
     try {
-        console.log('Submitting expense...');
-        spinner.classList.add('show');      
-        submitBtn.disabled = true;         
+        console.log('Submitting expense...');  
 
         const response = await fetch('/api/expenses', {
         method: 'POST',
