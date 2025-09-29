@@ -59,7 +59,10 @@
         <textarea id="userInput" placeholder="Enter your expenses here with text or voice. &#10;For example: I spent 42 euros on Pizza." rows="3" cols="50"></textarea>
         <div class="button-container">
           <button class="speak-btn" onclick="startVoiceInput()"><i class="fa fa-microphone" aria-hidden="true"></i> </button>
-          <button class="submit-btn" onclick="getExpensesFromChatGPT()">Submit</button>            
+          <button class="submit-btn" id="submit-btn" onclick="getExpensesFromChatGPT()">Submit</button>   
+          <div id="loading-spinner" style="display:none; margin-left:10px;">
+            <i class="fa fa-spinner fa-spin" style="font-size:20px; color:#252525;"></i>
+          </div>         
         </div>
       </div>
       <div class="month-navigation">

@@ -381,6 +381,8 @@ function showNotification(message, type = 'success') {
 async function getExpensesFromChatGPT() {
     const userInput = document.getElementById('userInput');
     const userText = userInput.value.trim();
+    const spinner = document.getElementById('loading-spinner');
+    const submitBtn = document.getElementById('submit-btn');
     
     // Remove existing styles
     userInput.classList.remove('success-bg', 'error-bg');
@@ -401,6 +403,9 @@ async function getExpensesFromChatGPT() {
     
     try {
         console.log('Submitting expense...');
+        spinner.classList.add('show');      
+        submitBtn.disabled = true;         
+
         const response = await fetch('/api/expenses', {
         method: 'POST',
         credentials: 'include',
@@ -469,6 +474,10 @@ async function getExpensesFromChatGPT() {
         }, 1000); 
         
     }
+    finally {
+        if (spinner) spinner.classList.remove('show');
+        if (submitBtn) submitBtn.disabled = false;       
+    }
 }
     
 // Fetch the list of expenses from the backend
@@ -494,7 +503,17 @@ async function fetchExpenses() {
         console.error('Error fetching expenses:', error);
     }
 }
-    
+
+//arrow-btn clicked effect
+document.addEventListener('DOMContentLoaded', () => {
+  const arrowButtons = document.querySelectorAll('.arrow-btn');
+  arrowButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.add('clicked');
+      setTimeout(() => btn.classList.remove('clicked'), 200); // remove after 200ms
+    });
+  });
+});
 
     
 //////////////////////////////////////////////////////////////////////////////////////////////////

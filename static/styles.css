@@ -29,7 +29,7 @@
     --color-white: #FFFFFF;
 
 
-    --color-red: #ea4040;
+    --color-red: #F23322;
     --color-green: #06b606;
 }
 
@@ -50,6 +50,7 @@ html, body {
     line-height: 1.2;
     background-color: var(--color-light-gray);
     color: var(--color-light-black);
+    -webkit-tap-highlight-color: transparent; /* removes blue flash on mobile */
 }
 
 input::placeholder,
@@ -71,11 +72,19 @@ input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
 }
 
-button:focus,
-.arrow-btn:focus {
+*:focus,
+*:focus-visible,
+*:active {
   outline: none !important;
   box-shadow: none !important;
-  background: transparent; /* optional */
+}
+
+button:focus,
+button:focus-visible,
+.arrow-btn:focus,
+.arrow-btn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 
@@ -325,6 +334,7 @@ input:focus, textarea:focus {
     box-shadow: none;
     background-color: #fff !important;
     -webkit-box-shadow: none;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 
@@ -475,14 +485,13 @@ textarea {
 
 
 
-.success-bg {
-    background-color: rgba(220, 255, 183, 0.5) !important;  
-    transition: background-color 0.5s ease-in-out;
+.success-bg { 
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .error-bg {
-    background-color: rgba(255, 104, 104, 0.5) !important;  
-    transition: background-color 0.5s ease-in-out;
+    border: 1px solid var(--color-red) !important;  
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .fade-out {
@@ -570,6 +579,18 @@ textarea {
     box-shadow: none !important;
 }
 
+#loading-spinner {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#loading-spinner.show {
+  display: inline-block;
+  opacity: 1;
+}
+
+
 .month-navigation {
     display: flex;
     align-items: center;
@@ -612,7 +633,11 @@ margin-left: auto;
     user-select: none;
 }
 
-
+.arrow-btn.clicked {
+  background-color: var(--color-light-black) !important;
+  color: var(--color-light-gray) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
 #expenseTable {
     flex-grow: 1; /* Expands to fill available space */
@@ -840,7 +865,7 @@ margin-left: auto;
     height: auto !important;
     display: block;
     margin: 0 auto;
-    margin-top: -50px;
+    margin-top: 0px;
     padding: 0;
 }
 
