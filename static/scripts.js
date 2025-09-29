@@ -87,8 +87,13 @@ async function login() {
   if (response.ok && result.status === 'success') {
     console.log("Login successful");
 
-    const greetingEl = document.getElementById("greeting");
-
+    // ✅ Save token + full name in localStorage
+    if (result.token) {
+      localStorage.setItem("auth_token", result.token);
+    }
+    if (result.full_name) {
+      localStorage.setItem("full_name", result.full_name);
+    }
 
     // Hide login and register pages
     document.getElementById('page-login').style.display = 'none';
@@ -101,9 +106,9 @@ async function login() {
     console.log('Logged in. Redirected to main page.');
 
     await fetchExpenses();
+
     const firstName = result.full_name.split(' ')[0];
     document.getElementById('greeting').innerHTML = `Hi ${firstName}!`;
-
 
   } else {
     console.log("Login failed:", result.error || "Invalid credentials");
@@ -114,6 +119,7 @@ async function login() {
     }
   }
 }
+
 
 
 function showLogin() {
@@ -145,6 +151,27 @@ function showLogin() {
 }
 
 
+async function autoLogin() {
+  const token = localStorage.getItem("auth_token");
+  if (!token) return; // no stored login
+
+  const response = await fetch("/api/auto-login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token })
+  });
+
+  const data = await response.json();
+
+  if (data.status === "success") {
+    showPage("page1");
+    document.getElementById("greeting").innerText = `Hello ${data.full_name}!`;
+    await fetchExpenses();
+  }
+}
+
+// Run autoLogin when app starts
+window.addEventListener("load", autoLogin);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////               LOGIN FAIL/RETRY                 //////////////////////////
@@ -196,6 +223,10 @@ async function logout() {
     if (response.ok) {
       console.log("Logged out successfully");
 
+      // Clear localStorage so auto-login won't trigger again
+      localStorage.removeItem("auth_token");
+      localStorage.removeItem("full_name");
+
       // Reset visibility and layout
       document.getElementById('page1').style.display = 'none';
       document.getElementById('page2').style.display = 'none';
@@ -203,11 +234,10 @@ async function logout() {
       document.getElementById('menu-bar').style.display = 'none';
 
       const loginPage = document.getElementById('page-login');
-      loginPage.style.display = 'flex'; // REAPPLY FLEX
+      loginPage.style.display = 'flex';
       loginPage.style.justifyContent = 'center';
       loginPage.style.alignItems = 'center';
 
-      // Clear login error if any
       const loginError = document.getElementById('login-error-message');
       if (loginError) {
         loginError.style.display = 'none';
