@@ -381,8 +381,6 @@ function showNotification(message, type = 'success') {
 async function getExpensesFromChatGPT() {
     const userInput = document.getElementById('userInput');
     const userText = userInput.value.trim();
-    const spinner = document.getElementById('loading-spinner');
-    const submitBtn = document.getElementById('submit-btn');
     
     // Remove existing styles
     userInput.classList.remove('success-bg', 'error-bg');
@@ -473,10 +471,6 @@ async function getExpensesFromChatGPT() {
             }, 1000); 
         }, 1000); 
         
-    }
-    finally {
-        if (spinner) spinner.classList.remove('show');
-        if (submitBtn) submitBtn.disabled = false;       
     }
 }
     
@@ -983,3 +977,14 @@ function showPage(pageId) {
 
 }
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////                    INSTALL                     //////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/static/service-worker.js")
+      .then(reg => console.log("Service Worker registered:", reg))
+      .catch(err => console.error("Service Worker registration failed:", err));
+  });
+}

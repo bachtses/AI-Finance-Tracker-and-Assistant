@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Expense Tracker</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#CFF500">
   <link rel="icon" href="images/expensens-favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -59,10 +61,7 @@
         <textarea id="userInput" placeholder="Enter your expenses here with text or voice. &#10;For example: I spent 42 euros on Pizza." rows="3" cols="50"></textarea>
         <div class="button-container">
           <button class="speak-btn" onclick="startVoiceInput()"><i class="fa fa-microphone" aria-hidden="true"></i> </button>
-          <button class="submit-btn" id="submit-btn" onclick="getExpensesFromChatGPT()">Submit</button>   
-          <div id="loading-spinner" style="display:none; margin-left:10px;">
-            <i class="fa fa-spinner fa-spin" style="font-size:20px; color:#252525;"></i>
-          </div>         
+          <button class="submit-btn" id="submit-btn" onclick="getExpensesFromChatGPT()">Submit</button>         
         </div>
       </div>
       <div class="month-navigation">
