@@ -133,15 +133,21 @@ def add_expenses():
     }
 
     payload = {
-        "model": "gpt-4",
+        "model": "gpt-4o-mini",
         "messages": [{"role": "user", "content": prompt}]
     }
 
     try:
         response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
         response.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 429:
+            return jsonify({'error': 'Rate limit exceeded. Please try again later.'}), 429
+        else:
+            return jsonify({'error': 'Failed to contact API', 'details': str(e)}), 500
     except requests.exceptions.RequestException as e:
-        return jsonify({'error': 'Failed to contact OpenAI', 'details': str(e)}), 500
+        return jsonify({'error': 'Failed to contact API', 'details': str(e)}), 500
+
 
     response_data = response.json()
     try:
@@ -307,7 +313,7 @@ def wrap_up_expenses_and_report():
         "Authorization": f"Bearer {openai_api_key}"
     }
     payload = {
-        "model": "gpt-4",
+        "model": "gpt-4o-mini",
         "messages": [{"role": "user", "content": prompt_wrap}]
     }
     try:
@@ -316,8 +322,13 @@ def wrap_up_expenses_and_report():
         response_data = response.json()
         chat_response = response_data["choices"][0]["message"]["content"]
         return jsonify({'response': chat_response})
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 429:
+            return jsonify({'error': 'Rate limit exceeded. Please try again later.'}), 429
+        else:
+            return jsonify({'error': 'Failed to contact API', 'details': str(e)}), 500
     except requests.exceptions.RequestException as e:
-        return jsonify({'error': 'Failed to contact OpenAI', 'details': str(e)}), 500
+        return jsonify({'error': 'Failed to contact API', 'details': str(e)}), 500
 
 
 #//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -414,12 +425,6 @@ def logout():
     return jsonify({'status': 'success', 'message': 'Logged out'})
 
 
-
-
-
-@app.route("/download-db")
-def download_db():
-    return send_from_directory("/opt/render/project/db", "database.db", as_attachment=True)
 
 
 #//////////////////////////////////////////////////////////////////////////////////////////////////
