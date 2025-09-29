@@ -401,8 +401,25 @@ def auto_login():
 #//////////////////////////////////////////////////////////////////////////////////////////////////
 @app.route('/api/logout', methods=['POST'])
 def logout():
+    data = request.get_json(silent=True) or {}
+    token = data.get("token")
+
+    with sqlite3.connect(DATABASE) as conn:
+        cursor = conn.cursor()
+        if token:
+            cursor.execute("UPDATE users SET auth_token=NULL WHERE auth_token=?", (token,))
+            conn.commit()
+
     session.clear()
     return jsonify({'status': 'success', 'message': 'Logged out'})
+
+
+
+
+
+@app.route("/download-db")
+def download_db():
+    return send_from_directory("/opt/render/project/db", "database.db", as_attachment=True)
 
 
 #//////////////////////////////////////////////////////////////////////////////////////////////////
