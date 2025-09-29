@@ -6,16 +6,32 @@ from datetime import datetime, timezone
 from flask import Flask, request, jsonify, send_from_directory, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
+import re
 
 
 app = Flask(__name__, static_folder='static', static_url_path='')
 app.secret_key = os.getenv("SECRET_KEY", "dev-key")
 
+
+app.config.update(
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE="Lax"
+)
 if os.getenv("ENV") == "prod":
     app.config.update(
-        SESSION_COOKIE_SAMESITE="None",
-        SESSION_COOKIE_SECURE=True
+        SESSION_COOKIE_SECURE=True,
+        SESSION_COOKIE_SAMESITE="None"
     )
+
+
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory(app.static_folder, 'manifest.json')
+
+@app.route('/service-worker.js')
+def sw():
+    return send_from_directory(app.static_folder, 'service-worker.js')
+
 
 # Database path (use env if you add a Render Disk)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -63,7 +79,8 @@ def get_api_key():
 
 # Insert common categories
 def insert_default_categories():
-    categories = ['Food', 'Transport', 'Entertainment', 'Shopping', 'Bills', 'Health', 'Education', 'Savings']
+    categories = ['Food', 'Transport', 'Entertainment', 'Shopping', 'Bills', 'Health', 'Education', 'Savings', 'Uncategorized']
+
     with sqlite3.connect(DATABASE) as conn:
         cursor = conn.cursor()
         for category in categories:
@@ -94,7 +111,7 @@ def add_expenses():
     prompt = (
         "Let's say you have an expense tracker app. It applies text analysis on the user's input and tries to figure out what expenses the text contains."
         "From the next input text, give me a JSON array of the expenses you figured out."
-        "Check for each expense and try to associate it to one of the following categories: Food, Transport, Entertainment, Shopping, Bills, Health, Education."
+        "Check for each expense and try to associate it to one of the following categories: Food, Transport, Entertainment, Shopping, Bills, Health, Education, Savings."
         "If the language is not English, tranlate everything to english."
         "If none match, return 'Uncategorized'."
         "Your response must be in this exact form with keys 'name', 'category', and 'amount'."
@@ -127,8 +144,12 @@ def add_expenses():
     response_data = response.json()
     try:
         chat_response = response_data["choices"][0]["message"]["content"]
-        print("🤖 GPT Response:", chat_response)  # Log full GPT response
-        expenses_list = json.loads(chat_response)
+        if app.debug:
+            print("🤖 GPT Response:", chat_response)  # Log full GPT response
+        match = re.search(r"\[.*\]", chat_response, re.S)
+        if not match:
+            return jsonify({'error': 'No valid JSON array in GPT response', 'raw': chat_response}), 500
+        expenses_list = json.loads(match.group(0))
     except (KeyError, json.JSONDecodeError) as e:
         return jsonify({'error': 'Failed to parse ChatGPT response', 'details': str(e)}), 500
     # Validate and process expenses
@@ -183,11 +204,6 @@ def add_expenses():
 def get_expenses():
     with sqlite3.connect(DATABASE) as conn:
         cursor = conn.cursor()
-        user_id = session.get('user_id')
-        if not user_id:
-            return jsonify({'error': 'Unauthorized'}), 401
-        
-        # only fetch this user’s expenses
         user_id = session.get('user_id')
         if not user_id:
             return jsonify({'error': 'Unauthorized'}), 401
@@ -261,6 +277,8 @@ def wrap_up_expenses_and_report():
 
     if not expenses:
         return jsonify({'error': 'No expenses found'}), 400
+
+    expenses = expenses[:200] # Limit to the last 200 expenses to avoid token overload
 
     expense_summary = "\n".join([f"{e[0]} ({e[1]}): {e[2]}€ on {e[3]}" for e in expenses])
 
