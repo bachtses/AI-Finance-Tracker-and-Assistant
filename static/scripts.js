@@ -988,3 +988,31 @@ if ("serviceWorker" in navigator) {
       .catch(err => console.error("Service Worker registration failed:", err));
   });
 }
+
+
+let deferredPrompt;
+const installBtn = document.getElementById('install-btn');
+
+// Listen for the event fired by the browser
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent the mini-info bar from appearing automatically
+  e.preventDefault();
+  deferredPrompt = e;
+  // Show your custom install button
+  installBtn.style.display = 'block';
+});
+
+// When user clicks your button
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) {
+    return;
+  }
+  // Show the install prompt
+  deferredPrompt.prompt();
+  // Wait for the user to respond
+  const { outcome } = await deferredPrompt.userChoice;
+  console.log(`User response to install: ${outcome}`);
+  // Reset
+  deferredPrompt = null;
+  installBtn.style.display = 'none';
+});
