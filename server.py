@@ -8,7 +8,16 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
 import re
 import secrets
+from dotenv import load_dotenv
 
+load_dotenv()
+
+
+def get_model():
+    return os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+
+def get_api_key():
+    return os.getenv("OPENAI_API_KEY")
 
 app = Flask(__name__, static_folder='static', static_url_path='')
 app.secret_key = os.getenv("SECRET_KEY", "dev-key")
@@ -75,8 +84,7 @@ def init_db():
 init_db()
 
 
-def get_api_key():
-    return os.getenv("OPENAI_API_KEY")
+
 
 
 # Insert common categories
@@ -133,12 +141,19 @@ def add_expenses():
     }
 
     payload = {
-        "model": "gpt-4o-mini",
+        "model": get_model(),
         "messages": [{"role": "user", "content": prompt}]
     }
 
     try:
         response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
+        # ✅ Add this debug logging before `response.raise_for_status()`
+        print("🔎 Rate limit info:")
+        print("Remaining requests this minute:", response.headers.get("x-ratelimit-remaining-requests"))
+        print("Reset time (requests):", response.headers.get("x-ratelimit-reset-requests"))
+        print("Remaining tokens this minute:", response.headers.get("x-ratelimit-remaining-tokens"))
+        print("Reset time (tokens):", response.headers.get("x-ratelimit-reset-tokens"))
+
         response.raise_for_status()
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 429:
@@ -295,7 +310,7 @@ def wrap_up_expenses_and_report():
     question_for_consult = data_for_consult.get('userInputForConsult', '').strip()
 
 
-    prompt_wrap = ("I will give you my total expenses database, and a question. So provide me the answer (in about 50 words). "
+    prompt_wrap = ("I will give you my total expenses database, and a question. So provide me the answear (in about 50 words). "
     "If the question is not related to the database then you should NOT answer! Respond as: Please enter a question related to your expenses."
     "If you are going to provide dates transform them to a human readable format."
     "My expenses are these: \n" + expense_summary + 
@@ -312,10 +327,13 @@ def wrap_up_expenses_and_report():
         "Content-Type": "application/json",
         "Authorization": f"Bearer {openai_api_key}"
     }
+
     payload = {
-        "model": "gpt-4o-mini",
-        "messages": [{"role": "user", "content": prompt_wrap}]
+    "model": get_model(),
+    "messages": [{"role": "user", "content": prompt_wrap}]
     }
+    
+
     try:
         response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
         response.raise_for_status()
@@ -425,8 +443,6 @@ def logout():
     return jsonify({'status': 'success', 'message': 'Logged out'})
 
 
-
-
 #//////////////////////////////////////////////////////////////////////////////////////////////////
 #////////////////////////           APP TO REMEMBER PASSWORD             //////////////////////////
 #//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -446,6 +462,4 @@ if __name__ == '__main__':
     host = "0.0.0.0" if os.getenv("PORT") else "127.0.0.1"  # 0.0.0.0 on Render, 127.0.0.1 locally
 
     app.run(debug=debug, host=host, port=port)
-
-
 
