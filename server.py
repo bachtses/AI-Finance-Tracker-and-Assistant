@@ -427,6 +427,15 @@ def logout():
 
 
 
+
+from flask import send_file
+
+@app.route("/download-db", methods=["GET"])
+def download_db():
+    db_path = DATABASE  # this already points to /opt/render/project/db/database.db on Render
+    return send_file(db_path, as_attachment=True)
+
+
 #//////////////////////////////////////////////////////////////////////////////////////////////////
 #////////////////////////           APP TO REMEMBER PASSWORD             //////////////////////////
 #//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -446,4 +455,5 @@ if __name__ == '__main__':
     host = "0.0.0.0" if os.getenv("PORT") else "127.0.0.1"  # 0.0.0.0 on Render, 127.0.0.1 locally
 
     app.run(debug=debug, host=host, port=port)
+
 
