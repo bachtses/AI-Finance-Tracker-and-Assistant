@@ -130,8 +130,6 @@ h2 {
     z-index: 1;
     background-color: var(--color-light-gray);
 
-    border-bottom: 1px solid var(--color-middle-gray); 
-    box-shadow: 0 1px 6px var(--color-middle-gray)!important;
 }
 
 .top-bar-title {
