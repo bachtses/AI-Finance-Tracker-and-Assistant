@@ -8,10 +8,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
 import re
 import secrets
-from dotenv import load_dotenv
-
-load_dotenv()
-
 
 def get_model():
     return os.getenv("OPENAI_MODEL", "gpt-4o-mini")
@@ -462,4 +458,5 @@ if __name__ == '__main__':
     host = "0.0.0.0" if os.getenv("PORT") else "127.0.0.1"  # 0.0.0.0 on Render, 127.0.0.1 locally
 
     app.run(debug=debug, host=host, port=port)
+
 
