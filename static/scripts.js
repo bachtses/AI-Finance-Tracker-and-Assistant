@@ -108,7 +108,7 @@ async function login() {
     await fetchExpenses();
 
     const firstName = result.full_name.split(' ')[0];
-    document.getElementById('greeting').innerHTML = `Hi ${firstName}!`;
+    document.getElementById('greeting').innerHTML = `Good morning, ${firstName}`;
 
   } else {
     console.log("Login failed:", result.error || "Invalid credentials");
@@ -165,7 +165,7 @@ async function autoLogin() {
 
   if (data.status === "success") {
     showPage("page1");
-    document.getElementById("greeting").innerText = `Hello ${data.full_name}!`;
+    document.getElementById("greeting").innerText = `Good morning, ${data.full_name}`;
     await fetchExpenses();
   }
 }
@@ -276,8 +276,7 @@ selectedMonth = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), 
 function updateMonthDisplay() {
     const monthDisplay = document.getElementById('currentMonthDisplay');
     if (monthDisplay) {
-        monthDisplay.innerHTML = '<i class="fa fa-calendar" aria-hidden="true"></i> ' +
-            selectedMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        monthDisplay.innerHTML = selectedMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     }
 }
 
@@ -334,21 +333,7 @@ function displayExpenses() {
         const dayName = expenseDate.toLocaleDateString('en-US', { weekday: 'long' });
         const monthYear = expenseDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
-        if (expenseDate.toDateString() !== lastDate) {
-            const dateSeparator = document.createElement('div');
-            dateSeparator.className = 'date-separator';
-            dateSeparator.innerHTML = `
-                <div class="date-block">
-                    <div class="day-number">${dayNumber}</div>
-                    <div class="day-details">
-                        <div class="day-name">${dayName}</div>
-                        <div class="month-year">${monthYear}</div>
-                    </div>
-                </div>
-            `;
-            tableBody.appendChild(dateSeparator);
-            lastDate = expenseDate.toDateString();
-        }
+
 
         const iconClass = categoryIcons[expense.category] || 'fa-tag';
 
@@ -356,13 +341,16 @@ function displayExpenses() {
         row.className = 'expense-item';
 
         row.innerHTML = `
+            <div class="expense-item-icon">
+                <i class="fa ${iconClass}" aria-hidden="true"></i>
+            </div>
             <div class="expense-item-left">
-                <span><i class="fa ${iconClass}" aria-hidden="true"></i> ${expense.name}</span>
+                <span class="expense-name">${expense.name}</span>
                 <div class="expense-category">${expense.category}</div>
             </div>
             <div class="expense-item-middle">
-                <div class="expense-amount">${parseFloat(expense.amount).toFixed(2)}€</div>
-                <div class="expense-date">${expenseDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</div>      
+                <div class="expense-amount">€${parseFloat(expense.amount).toFixed(2)}</div>
+                <div class="expense-date">${expenseDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>   
             </div>
             <div class="expense-item-right">
                 <button class="delete-btn" onclick="deleteExpense(${expense.id})">

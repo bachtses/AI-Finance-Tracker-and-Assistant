@@ -50,7 +50,10 @@
   <div id="page1" class="page">
     <div class="container">
       <div class="top-bar">
-        <h1 class="top-bar-title"><img src="images/site-logo-home.png" alt="Expensens Logo" class="top-logo"></h1>
+        <div class="top-bar-left">
+          <img src="images/site-logo-home.png" alt="Expensens Logo" class="top-logo">
+          <span class="top-bar-title">Expensens</span>
+        </div>
         <div class="user-menu">
           <i class="fa fa-user" onclick="toggleUserMenu()"></i>
           <div class="dropdown-content">
@@ -60,21 +63,17 @@
       </div>
       <div class="user-dialog-container">
         <h2 id="greeting"></h2>
-        <textarea id="userInput" placeholder="Enter your expenses here with text or voice. &#10;For example: I spent 42 euros on Pizza." rows="3" cols="50"></textarea>
+        <textarea id="userInput" placeholder="Enter your expenses here..." rows="2" cols="50" ></textarea>
         <div class="button-container">
-          <button class="speak-btn" onclick="startVoiceInput()"><i class="fa fa-microphone" aria-hidden="true"></i> </button>
-          <button class="submit-btn" id="submit-btn" onclick="getExpensesFromChatGPT()">Submit</button>         
+          <button class="speak-btn" onclick="startVoiceInput()"><i class="fa fa-microphone" aria-hidden="true"></i></button>
+          <button class="submit-btn" id="submit-btn" onclick="getExpensesFromChatGPT()">Add Expense</button>         
         </div>
       </div>
       <div class="month-navigation">
+        <button id="prevMonth" class="arrow-btn" onclick="changeMonth(-1)"><i class="fa fa-chevron-left"></i></button>
         <span id="currentMonthDisplay"></span>
-        <button id="prevMonth" class="arrow-btn" onclick="changeMonth(-1)">
-            <i class="fa fa-chevron-left"></i>
-        </button>
-        <button id="nextMonth" class="arrow-btn" onclick="changeMonth(1)">
-            <i class="fa fa-chevron-right"></i>
-        </button>
-      </div>      
+        <button id="nextMonth" class="arrow-btn" onclick="changeMonth(1)"><i class="fa fa-chevron-right"></i></button>
+      </div>  
       <table id="expenseTable">
         <thead>
         </thead>

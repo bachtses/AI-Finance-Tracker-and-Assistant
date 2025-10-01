@@ -1,31 +1,48 @@
 
 /* Fonts */
+/* Regular */
 @font-face {
     font-family: 'HelveticaCustom';
     src: url('/fonts/helvetica/Helvetica.ttf') format('truetype');
-    font-weight: normal;
     font-style: normal;
+    font-weight: normal; 
 }
-@font-face {
-    font-family: 'HelveticaCustom';
-    src: url('/fonts/helvetica/helvetica black.otf') format('opentype');
-    font-weight: 900;   
-    font-style: normal;
-}
+
+/* Bold */
 @font-face {
     font-family: 'HelveticaCustom';
     src: url('/fonts/helvetica/Helvetica-Bold.ttf') format('truetype');
-    font-weight: 600;
+    font-style: normal;
+    font-weight: bold;  
 }
+
+/* Extra Bold */
+@font-face {
+    font-family: 'HelveticaCustom';
+    src: url('/fonts/helvetica/Helvetica-Bold.ttf') format('opentype');
+    font-style: normal;
+    font-weight: bolder; 
+}
+
+/* Light */
+@font-face {
+    font-family: 'HelveticaCustom';
+    src: url('/fonts/helvetica/Helvetica Light Regular.otf') format('opentype');
+    font-style: normal;
+    font-weight: lighter;
+}
+
+
+
 
 /* Color Pallette */
 :root {
     --color-lime: #CFF500;
-    --color-light-black: #252525;
-    --color-light-gray: #F6F6F6;
-    --color-middle-gray: #c7c7c7;
-    --color-dark-gray: #898A8E;
-    --color-black: #000000;
+    --color-light-black: #525252;
+    --color-light-gray: #fffefd;
+    --color-middle-gray: #d8d8d8;
+    --color-dark-gray: #969794;
+    --color-black: #151515;
     --color-white: #FFFFFF;
 
 
@@ -53,15 +70,6 @@ html, body {
     -webkit-tap-highlight-color: transparent; /* removes blue flash on mobile */
 }
 
-input::placeholder,
-textarea::placeholder {
-    font-family: 'HelveticaCustom';
-    font-size: 15px;
-    letter-spacing: 0.5px;
-    font-weight: normal;
-    color: var(--color-middle-gray);
-    opacity: 0.5;
-}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -92,7 +100,6 @@ h1 {
     text-align: center;
     color: var(--color-light-black);
     font-size: 23px;
-    letter-spacing: 2px;
 }
 
 h2 {
@@ -115,34 +122,38 @@ h2 {
 
 
 .top-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    display: flex;
-    justify-content:space-between;
-    align-items: center;
-    padding: 14px 0;
-    padding-left: 15px;
-    padding-right: 15px;
-    z-index: 1;
-    z-index: 1;
-    background-color: var(--color-light-gray);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
+  padding: 14px 24px;
+  background-color: transparent;
+  z-index: 1;
+}
 
+/* wrapper for logo + title */
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* space between logo and title */
+}
+
+.top-logo {
+    height: 31px;
+    padding-bottom: 7px;
 }
 
 .top-bar-title {
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--color-light-black);
-    letter-spacing: 0.5px;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'HelveticaCustom', Arial, sans-serif;
+  color: var(--color-light-black);
 }
 
-.top-bar .fa-user {
-    font-size: 30px; 
-    color: var(--color-middle-gray);
-}
 
 .container {
     display: flex;
@@ -152,11 +163,6 @@ h2 {
     padding-bottom: 60px;  
     overflow: hidden;
     padding-top: 76px; 
-}
-
-.top-logo {
-  height: 30px;           
-  margin-right: 10px;     
 }
 
 
@@ -178,21 +184,20 @@ h2 {
     padding: 18px 15px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 30px;
+    border-radius: 20px;
     font-size: 15px;
     color: var(--color-light-black);
 }
 
 #page-register button {
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: bold;
     color: var(--color-light-black);
     background-color: var(--color-lime);
     padding: 18px 70px;
     border: none;
-    border-radius: 30px;
+    border-radius: 20px;
     cursor: pointer;
-    letter-spacing: 0.5px;
 }
 
 #page-register button:hover {
@@ -208,7 +213,7 @@ h2 {
     margin-bottom: 10px;
     border-radius: 5px;
     text-align: center;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 
@@ -228,7 +233,7 @@ h2 {
 .login-box {
     background: var(--color-light-gray);
     padding: 40px 30px;
-    border-radius: 12px;
+    border-radius: 20px;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.0);
     width: 90%;
     max-width: 400px;
@@ -244,21 +249,21 @@ h2 {
 }
 
 .login-box h4 {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--color-light-black);
     margin-bottom: 60px;
     text-align: left;
-    letter-spacing: 0.5px;
 }
 
 .login-box h1 {
-    font-size: 46px;
+    font-family: 'HelveticaCustom';
+    font-size: 40px;
+    font-weight: bold;
     color: var(--color-light-black);
     margin-bottom: 2px;
     text-align: left;
-    letter-spacing: 0.6px;
     font-family: 'HelveticaCustom';
-    font-weight: 900;    
+    font-weight: bolder;    
 }
 
 .login-box h2 {
@@ -266,7 +271,6 @@ h2 {
     color: var(--color-light-black);
     margin-bottom: 16px;
     text-align: left;
-    letter-spacing: 1px;
 }
 
 .login-box h3 {
@@ -275,8 +279,7 @@ h2 {
     margin-bottom: 36px;
     text-align: left;
     padding-right: 30px;
-    font-weight: 500;
-    letter-spacing: 0.2px;
+    font-weight: normal;
 }
 
 .login-box input[type="text"],
@@ -285,24 +288,22 @@ h2 {
     padding: 14px 18px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 30px;
-    font-size: 15px;
-    letter-spacing: 0.5px;
+    border-radius: 20px;
+    font-size: 16px;
     color: var(--color-light-black);
     font-weight: normal;
 }
 
 .login-box button {
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: bold;
     color: var(--color-light-black);
     background-color: var(--color-lime);
     padding: 16px 70px;
     width:100%;
     border: none;
-    border-radius: 30px;
+    border-radius: 20px;
     cursor: pointer;
-    letter-spacing: 0.5px;
     margin-top: 15px;
 }
 
@@ -319,14 +320,13 @@ h2 {
 
 .login-box a {
     color: var(--color-light-black);
-    font-weight: 600;
+    font-weight: bold;
     text-decoration: none;
     font-size: 14px;
-    letter-spacing: 0.5px;
 }
 
 #menu-bar {
-  display: none; /* hide by default */
+  display: none; 
 }
 
 
@@ -335,7 +335,7 @@ input:focus, textarea:focus {
     outline: none !important;
     border: 1.5px solid var(--color-light-black) !important;   
     box-shadow: none;
-    background-color: #fff !important;
+    background-color: transparent !important;
     -webkit-box-shadow: none;
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
@@ -357,7 +357,7 @@ input:focus, textarea:focus {
     min-width: 120px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     z-index: 999;
-    border-radius: 30px;
+    border-radius: 20px;
     overflow: hidden;
 }
 
@@ -369,8 +369,7 @@ input:focus, textarea:focus {
     text-decoration: none;
     display: block;
     border: 1px solid var(--color-light-gray);
-    border-radius: 30px;
-    letter-spacing: 0.2px;
+    border-radius: 20px;
     outline: none;
     box-shadow: none;
 
@@ -397,9 +396,10 @@ input:focus, textarea:focus {
     background: var(--color-light-gray);
     display: flex;
     justify-content: space-around;
-    border-top: 1px solid #ccc;
-    padding: 14px 0;
+    padding: 10px 18px;
     margin-top: 15px;
+    border-top: 1px solid var(--color-middle-gray);
+    border-radius: 80px;
 }
 
 .menu-bar button {
@@ -407,16 +407,15 @@ input:focus, textarea:focus {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 2px;
     background-color: transparent;
     border: none;
 }
 
 .menu-text {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--color-dark-gray);
-    font-weight: 600;
-    letter-spacing: 0.2px;
+    font-weight: normal;
 }
 
 .menu-bar button i {
@@ -428,7 +427,7 @@ input:focus, textarea:focus {
 
 .menu-bar button.active i,
 .menu-bar button.active .menu-text {
-    color: var(--color-light-black);
+    color: var(--color-black);
 }
 
 
@@ -439,13 +438,13 @@ input:focus, textarea:focus {
 /*////////////////////////////////////////////////////////////////////////////////*/
 #greeting {
     font-family: 'HelveticaCustom';
-    font-size: 30px;
-    font-weight: 900;
+    font-size: 40px;
+    font-weight: bold;
     color: var(--color-light-black);
-    padding: 8px 15px 0 0;
-    margin-bottom: 15px;
+    padding: 0px 15px 0 0;
+    margin-bottom: 22px;
     text-align: left;
-    letter-spacing: 0px;
+    line-height: 1;
 
 }
 
@@ -453,39 +452,40 @@ input:focus, textarea:focus {
     height: auto;            
     flex-shrink: 0;         
     overflow: hidden;         
-    padding: 10px;          
+    padding: 10px 18px; 
     box-sizing: border-box;  
 }
 
 textarea {
     width: 100%;
     border: 1px solid var(--color-middle-gray);
-    border-radius: 30px;
+    border-radius: 20px;
     resize: vertical;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 20px 20px 20px 20px!important;
     margin: 2px auto;
     margin-top: 2px;
     display: block;
-    font-family: 'HelveticaCustom';
-    font-size: 15px;
-    color: var(--color-light-black);
-    letter-spacing: 0.5px;
-    line-height: 1.2;
 }
 
 
 #userInput {
     font-family: 'HelveticaCustom';
-    font-size: 15px;
-    padding-top: 20px;
-    padding-bottom: 15px;
+    font-size: 19px;
+    font-weight: normal;
+    padding-top: 16px;
+    padding-bottom: 0px;
     color: var(--color-light-black);
-    letter-spacing: 0.5px;
     line-height: 1.2;
 }
 
-
+input::placeholder,
+textarea::placeholder {
+    font-family: 'HelveticaCustom';
+    font-size: 19px;
+    font-weight: normal;
+    color: var(--color-dark-gray);
+}
 
 .success-bg { 
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -505,25 +505,24 @@ textarea {
 
 .button-container {
     display: flex;
-    gap: 0px;  
+    gap: 8px;  
     width: 100%;
-    margin-top: 10px;
+    margin-top: 12px;
     margin-bottom: 10px;
 }
 
 
 .speak-btn {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--color-light-black);
+    font-size: 19px;
+    font-weight: bold;
+    color: var(--color-black);
     background-color: var(--color-light-gray);
-    flex: 2;
-    padding: 14px 40px;
-    border: 1px solid #ccc;
-    border-radius: 30px;
+    flex: 3;
+    padding: 16px 0px;
+    border: 1px solid var(--color-middle-gray);
+    border-radius: 20px;
     cursor: pointer;
-    margin: 5px;
-    letter-spacing: 0.2px;
+    margin: 0px;
     outline: none;
     box-shadow: none;
 }
@@ -550,17 +549,16 @@ textarea {
 }
 
 .submit-btn {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--color-light-black);
+    font-size: 19px;
+    font-weight: bold;
+    color: var(--color-black);
     background-color: var(--color-lime);
-    flex: 8;
-    padding: 14px 60px;
-    border: 1px solid #ccc;
-    border-radius: 30px;
+    flex: 7;
+    padding: 16px 0px;
+    border: 1px solid var(--color-lime);
+    border-radius: 20px;
     cursor: pointer;
-    margin: 5px;
-    letter-spacing: 0.5px;
+    margin: 0px;
     outline: none; 
     box-shadow: none; 
     -webkit-user-select: none; /* Safari */
@@ -596,60 +594,60 @@ textarea {
 .month-navigation {
     display: flex;
     align-items: center;
+    justify-content: space-between;   
     width: 100%;
-    padding: 0 10px;
-    padding-top: 10px;
-    gap:8px;
-    margin-bottom: 0px;
-    font-size: 15px;
-    color: var(--color-light-black);
-    letter-spacing: 0.5px;
-    
-  }
-  
-#currentMonthDisplay {
-text-align: left;
+    margin: 0 auto;      
+    padding: 4px 18px;
+    gap: 12px;
+    font-size: 19px;
+    font-weight: bold;
+    color: var(--color-black);
 }
 
+.month-navigation button {
+  flex: 0 0 auto;  
+}
+
+#currentMonthDisplay {
+  flex: 1;
+  text-align: center;  
+}
+
+
+  
 #prevMonth {
 margin-left: auto; 
 }
 
 
 .arrow-btn {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--color-light-black);
-    background-color: var(--color-light-gray);
+    font-size: 19px;
+    font-weight: normal;
+    color: var(--color-black);
     width: auto;
-    padding: 14px 30px;
-    border: 1px solid #ccc;
-    border-radius: 30px;
+    padding: 14px 6px;
+    border: 0px;
+    border-radius: 20px;
     cursor: pointer;
     margin: 0px;
-    letter-spacing: 0px;
     outline: none;
     box-shadow: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    background-color: transparent;
 }
 
-.arrow-btn.clicked {
-  background-color: var(--color-light-black) !important;
-  color: var(--color-light-gray) !important;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
 
 #expenseTable {
-    flex-grow: 1; /* Expands to fill available space */
+    flex-grow: 1;  
     margin: 0;
     padding-bottom: 70px;
     width: 100%;
     border-collapse: collapse;
     display: block;
     overflow-y: auto;
-    max-height: calc(100vh - 150px); /* Adjust this value to match your layout */
+    max-height: calc(100vh - 150px);  
 }
 
 
@@ -673,6 +671,7 @@ margin-left: auto;
 #expenseListDisplay {
     width: 100%;  
     display: block;  
+    padding: 0 18px;
 }
 
 #expenseListDisplay tr {
@@ -714,14 +713,13 @@ margin-left: auto;
 
 .day-number {
     font-size: 22px;
-    font-weight: 900;
+    font-weight: bolder;
     color: var(--color-light-black);
     background-color: transparent;
     padding: 0px 15px;
     border-radius: 8px;
     text-align: center;
     min-width: 50px;
-    letter-spacing: 2px;
 }
 
 .day-details {
@@ -731,46 +729,56 @@ margin-left: auto;
 }
 
 .day-name {
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: bold;
     color: var(--color-light-black);
-    letter-spacing: 0.5px;
 }
 
 .month-year {
     font-size: 14px;
     color: var(--color-light-black);
-    letter-spacing: 0.2px;
 }
 
 
 .expense-item {
     display: flex;
-    width: 100%;  
+    width: 100%;
     justify-content: space-between;
     align-items: center;
-    padding: 12px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border-radius: 8px;
-    margin-bottom: 2px;
+    padding: 14px 6px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    background-color: var(--color-white);
+    box-shadow: 0 8px 10px -8px rgba(52, 52, 52, 0.15);
+    position: relative;
+    z-index: 0;
 }
 
 
-.expense-item-left {
-    font-size: 14px;
-    font-weight: 100;
+.expense-item-icon {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:0;
+    margin:0;
+    margin-right: 10px;
+    font-size: 24px;
     color: var(--color-light-black);
-    letter-spacing: 0.5px;
-    font-weight: 500;
-    
+}
+
+.expense-item-left {
+    font-size: 19px;
+    font-weight: bold;
+    color: var(--color-black); 
     width: 50%; 
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     align-items: flex-start; 
-    gap: 5px;
-
+    gap: 0px;
 }
 
 .expense-item-middle {
@@ -795,34 +803,31 @@ margin-left: auto;
     color: var(--color-light-black);
 }
 
-
 .expense-name {
     font-family: 'HelveticaCustom';
-    font-size: 14px;
-    font-weight: 100;
-    letter-spacing: 0.5px;
-    color: var(--color-light-black);
+    font-size: 19px;
+    font-weight: bold;
+    color: var(--color-black);
 }
 
 .expense-category {
-    font-size: 12px;
-    font-weight: 100;
-    letter-spacing: 0.2px;
+    font-size: 16px;
+    font-weight: lighter;
     color: var(--color-dark-gray);
 }
 
 .expense-amount {
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    color: var(--color-light-black);
+    font-size: 19px;
+    font-weight: bold;
+    color: var(--color-black);
 }
 
 .expense-date {
-    font-size: 11px;
-    font-weight: 100;
-    letter-spacing: 0.2px;
+    font-size: 16px;
+    font-weight: lighter;
     color: var(--color-dark-gray);
 }
+
 
 .delete-btn {
     color: var(--color-light-black);
@@ -875,10 +880,9 @@ margin-left: auto;
 .category-bars-title {
     display: flex;
     justify-content: space-between;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: normal;
     color: var(--color-light-black);
-    letter-spacing: 0.5px;
     padding: 10px 15px;
     border-bottom: 1px solid var(--color-middle-gray);
     margin-top: 0px;
@@ -911,9 +915,8 @@ margin-left: auto;
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    font-weight: 100;
+    font-weight: lighter;
     color: var(--color-light-black);
-    letter-spacing: 0.5px;
     font-weight: 500;
     margin-bottom: -2px;
     
@@ -921,15 +924,14 @@ margin-left: auto;
 
 .amount {
     font-size: 14px;
-    font-weight: 100;
-    letter-spacing: 0.5px;
+    font-weight: lighter;
     color: var(--color-light-black);
 }
 
 .progress {
     background-color: var(--color-light-gray);
     height: 8px;
-    border-radius: 30px !important;
+    border-radius: 20px !important;
     width: 100%;
     position: relative;
 }
@@ -953,11 +955,10 @@ margin-left: auto;
 
 #page3 h2 {
     font-family: 'HelveticaCustom';
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: normal;
     padding-bottom: 0px;
     color: var(--color-dark-gray);
-    letter-spacing: 0.5px;
     text-align: justify;
     padding-left: 15px;
     padding-right: 15px;
@@ -1006,12 +1007,12 @@ margin-left: auto;
   border-radius: 20px;
   border: 1px solid #ccc;
   outline: none;
-  resize: none;          /* prevent manual resize */
-  overflow: hidden;      /* hide scrollbars */
-  min-height: 40px;      /* base height */
-  max-height: 120px;     /* optional: prevent it from taking over the screen */
+  resize: none;          
+  overflow: hidden;      
+  min-height: 40px;      
+  max-height: 120px;     
   font-family: inherit;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .chat-input-area button {
@@ -1019,7 +1020,7 @@ margin-left: auto;
   margin-top: 15px;
   background: var(--color-lime);
   border: none;
-  border-radius: 50%;
+  border-radius: 20px;
   width: 50px;
   height: 42px;
   cursor: pointer;
@@ -1033,11 +1034,10 @@ margin-left: auto;
     max-width: 75%;
     padding: 10px 14px;
     margin: 8px 0;
-    border-radius: 12px;
+    border-radius: 20px;
     font-family: 'HelveticaCustom';
-    font-size: 15px;
+    font-size: 16px;
     color: var(--color-light-black);
-    letter-spacing: 0.5px;
     line-height: 1.2;
 }
 
@@ -1078,7 +1078,6 @@ margin-left: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
-        letter-spacing: 0.2px;
     }
 
     .primary-btn {
