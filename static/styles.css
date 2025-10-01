@@ -396,7 +396,7 @@ input:focus, textarea:focus {
     background: var(--color-light-gray);
     display: flex;
     justify-content: space-around;
-    padding: 10px 18px;
+    padding: 8px 18px;
     margin-top: 15px;
     border-top: 0px solid var(--color-middle-gray);
     border-radius: 0px;
@@ -413,7 +413,7 @@ input:focus, textarea:focus {
 }
 
 .menu-text {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--color-dark-gray);
     font-weight: normal;
 }
@@ -778,7 +778,7 @@ margin-left: auto;
     flex-direction: column;
     box-sizing: border-box;
     align-items: flex-start; 
-    gap: 0px;
+    gap: 1px;
 }
 
 .expense-item-middle {
@@ -787,7 +787,7 @@ margin-left: auto;
     flex-direction: column;
     box-sizing: border-box;
     align-items: flex-end; 
-    gap: 0px;
+    gap: 1px;
 }
 
 .expense-item-right {
@@ -805,7 +805,7 @@ margin-left: auto;
 
 .expense-name {
     font-family: 'HelveticaCustom';
-    font-size: 18px;
+    font-size: 16px;
     font-weight: normal;
     color: var(--color-black);
 }
@@ -817,8 +817,8 @@ margin-left: auto;
 }
 
 .expense-amount {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: normal;
     color: var(--color-black);
 }
 
