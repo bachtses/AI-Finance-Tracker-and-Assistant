@@ -131,7 +131,7 @@ function showLogin() {
         loginPage.style.justifyContent = 'flex-start';
         loginPage.style.alignItems = 'center';
         loginPage.style.height = '100vh';
-        targetPage.style.paddingtop = '120px';
+        loginPage.style.paddingTop = '120px';
     }
 
     const registerPage = document.getElementById('page-register');
@@ -312,6 +312,14 @@ function displayExpenses() {
         return expenseMonth === selectedMonthStr;
     });
 
+    if (filteredExpenses.length === 0) {
+        const emptyRow = document.createElement('div');
+        emptyRow.className = "no-expenses";
+        emptyRow.innerHTML = `<p>No expenses yet for ${selectedMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>`;
+        tableBody.appendChild(emptyRow);
+        return;
+    }
+
     const sortedExpenses = filteredExpenses.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
 
     let lastDate = "";
@@ -349,7 +357,7 @@ function displayExpenses() {
                 <div class="expense-category">${expense.category}</div>
             </div>
             <div class="expense-item-middle">
-                <div class="expense-amount">€${parseFloat(expense.amount).toFixed(2)}</div>
+                <div class="expense-amount">&#8364;${parseFloat(expense.amount).toFixed(2)}</div>
                 <div class="expense-date">${expenseDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>   
             </div>
             <div class="expense-item-right">
@@ -618,8 +626,7 @@ selectedStatsMonth = new Date(selectedStatsMonth.getFullYear(), selectedStatsMon
 function updateStatsMonthDisplay() {
     const statsMonthDisplay = document.getElementById('currentMonthStatsDisplay');
     if (statsMonthDisplay) {
-        statsMonthDisplay.innerHTML = '<i class="fa fa-calendar" aria-hidden="true"></i> ' +
-            selectedStatsMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        statsMonthDisplay.innerHTML =  selectedStatsMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     }
 }
 
@@ -706,11 +713,9 @@ function updateCategoryChart(data) {
                     ctx.stroke();
                 }
             });
-    
             ctx.restore();
         }
     };
-    
     
     // Create the doughnut chart
     window.categoryChart = new Chart(ctx, {
@@ -718,42 +723,44 @@ function updateCategoryChart(data) {
         data: {
             labels: labels,
             datasets: [{
-                data: totals,
-                backgroundColor: backgroundColors,
-                borderWidth: 2,
-                hoverOffset: 5
+              data: totals,
+              backgroundColor: backgroundColors,
+              borderWidth: 2,
+              hoverOffset: 4,
+              radius: '95%',   
+              cutout: '45%'   
             }]
         },
         options: {
-            responsive: true,
-            cutout: '45%',
-            layout: {
-                padding: {
-                    top: 30,
-                    bottom: 0,
-                    left: 102,   
-                    right: 102   
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                },
-                datalabels: {
-                    color: '#333',
-                    font: { size: 14, weight: 'normal' },
-                    anchor: 'end',
-                    align: 'end',
-                    offset: 20,
-                    clip: false,
-                    formatter: (value, context) => {
-                        const percentage = (value / totalSum) * 100;
-                        return percentage >= 3 ? context.chart.data.labels[context.dataIndex] : '';
-                    }
-                }
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '45%',
+          layout: {
+            padding: {
+              top: 20,
+              bottom: 10,
+              left: 85,
+              right: 85
             }
+          },
+          plugins: {
+            legend: { display: false },
+            datalabels: {
+              color: '#525252',
+              font: { size: 16, weight: 'normal' },
+              anchor: 'end',
+              align: 'end',
+              offset: 12,
+              formatter: (value, context) => {
+                const totalSum = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                const percentage = (value / totalSum) * 100;
+                return percentage >= 3 ? context.chart.data.labels[context.dataIndex] : '';
+              }
+            }
+          }
         },
         plugins: [calloutLinesPlugin]
+
     });
 
     updateCategoryBars(data, backgroundColors);
@@ -764,6 +771,12 @@ function updateCategoryBars(data, colors) {
     const container = document.getElementById('category-bars');
     container.innerHTML = '';
     const totalSum = data.reduce((sum, item) => sum + item.total, 0);
+
+    if (!data || data.length === 0 || totalSum === 0) {
+        container.innerHTML = `<p class="no-expenses">No expenses yet for ${selectedStatsMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>`;
+        return;
+    }
+
 
     // Define icons for each category
     const categoryIcons = {
@@ -784,9 +797,9 @@ function updateCategoryBars(data, colors) {
             <div class="category-bar">
                 <div class="icon-label">
                     <span><i class="fa ${iconClass}" aria-hidden="true"></i> ${item.category}</span>
-                    <span class="amount">${item.total.toFixed(2)}€</span>
+                    <span class="amount">&#8364;${item.total.toFixed(2)}</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #666; margin-top: 5px;">
+                <div class="progress-row">
                     <div class="progress" style="background-color: #E0E0E0; height: 8px; border-radius: 5px; width: 85%;">
                         <div class="progress-bar" style="height: 100%; border-radius: 5px; background: ${colors[index % colors.length]}; width: ${percentage}%;"></div>
                     </div>

@@ -52,7 +52,7 @@
       <div class="top-bar">
         <div class="top-bar-left">
           <img src="images/site-logo-home.png" alt="Expensens Logo" class="top-logo">
-          <span class="top-bar-title">Expensens</span>
+          <span class="top-bar-title-expensens">Expensens</span>
         </div>
         <div class="user-menu">
           <i class="fa fa-user" onclick="toggleUserMenu()"></i>
@@ -112,11 +112,12 @@
       <i class="fa fa-user" aria-hidden="true"></i>
     </div>
     <div class="chat-container" id="chat-container">
-      <div class="message assistant-message">👋 Hello, I’m your AI assistant!</div>
+      <div class="message assistant-message">Hello, I’m your AI assistant!</div>
+      <div class="message assistant-message">Ask me anything about your expenses...</div>
     </div>
 
     <div class="chat-input-area">
-      <textarea id="chatInput" placeholder="Ask me anything about your expenses..."></textarea>
+      <textarea id="chatInput" placeholder="Message" rows="1"></textarea>
       <button onclick="sendMessage()">
         <i class="fa fa-paper-plane"></i>
       </button>

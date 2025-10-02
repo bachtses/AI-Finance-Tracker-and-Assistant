@@ -1,5 +1,6 @@
 
 /* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
 /* Regular */
 @font-face {
     font-family: 'HelveticaCustom';
@@ -39,11 +40,12 @@
 :root {
     --color-lime: #CFF500;
     --color-light-black: #525252;
-    --color-light-gray: #fffefd;
+    --color-light-gray: #ebebeb;
     --color-middle-gray: #b3b3b3;
     --color-dark-gray: #969794;
     --color-black: #151515;
-    --color-white: #FFFFFF;
+    --color-white: #fffefd;
+    --color-another-lime: #A1B52D;
 
 
     --color-red: #F23322;
@@ -64,8 +66,8 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: 'HelveticaCustom', 'Helvetica', Arial, sans-serif !important;
-    line-height: 1.2;
-    background-color: var(--color-light-gray);
+    line-height: 1;
+    background-color: var(--color-white);
     color: var(--color-light-black);
     -webkit-tap-highlight-color: transparent; /* removes blue flash on mobile */
 }
@@ -147,11 +149,22 @@ h2 {
     padding-bottom: 7px;
 }
 
-.top-bar-title {
+.top-bar-title-expensens {
   font-size: 18px;
   font-weight: bold;
   font-family: 'HelveticaCustom', Arial, sans-serif;
   color: var(--color-light-black);
+}
+
+.top-bar-title {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'HelveticaCustom', Arial, sans-serif;
+  color: var(--color-light-black);
+}
+
+.top-bar i {
+  font-size: 24px;
 }
 
 
@@ -159,7 +172,7 @@ h2 {
     display: flex;
     flex-direction: column;
     height: 100vh; 
-    padding: 10px;
+    padding: 10px 24px;
     padding-bottom: 60px;  
     overflow: hidden;
     padding-top: 76px; 
@@ -231,7 +244,7 @@ h2 {
 }
 
 .login-box {
-    background: var(--color-light-gray);
+    background: var(--color-white);
     padding: 40px 30px;
     border-radius: 20px;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.0);
@@ -274,7 +287,7 @@ h2 {
 }
 
 .login-box h3 {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--color-dark-gray);
     margin-bottom: 36px;
     text-align: left;
@@ -285,26 +298,26 @@ h2 {
 .login-box input[type="text"],
 .login-box input[type="password"] {
     width: 100%;
-    padding: 14px 18px;
+    padding: 16px 18px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
+    border: 1px solid var(--color-middle-gray);
+    border-radius: 80px;
     font-size: 16px;
     color: var(--color-light-black);
-    font-weight: normal;
+    font-weight: normal; 
 }
 
 .login-box button {
     font-size: 16px;
     font-weight: bold;
-    color: var(--color-light-black);
+    color: var(--color-black);
     background-color: var(--color-lime);
     padding: 16px 70px;
     width:100%;
-    border: none;
-    border-radius: 20px;
+    border-radius: 80px;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: 12px;
+    border: 1px solid var(--color-lime);
 }
 
 .login-box button:hover {
@@ -347,6 +360,7 @@ input:focus, textarea:focus {
 .user-menu {
   position: relative;
   display: inline-block;
+  font-size: 24px;
 }
 
 .dropdown-content {
@@ -355,21 +369,22 @@ input:focus, textarea:focus {
     right: 0;
     background-color: var(--color-light-gray);
     min-width: 120px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 4px -6px rgba(52, 52, 52, 0.05);
     z-index: 999;
     border-radius: 20px;
     overflow: hidden;
 }
 
 .dropdown-content a {
-    font-size: 14px;
-    color: var(--color-dark-gray);
-    background-color: var(--color-light-gray);
-    padding: 11px 34px;
+    font-size: 16px;
+    color: var(--color-light-black);
+    background-color: var(--color-white);
+    padding: 10px 12px;
+    text-align: center;
     text-decoration: none;
     display: block;
-    border: 1px solid var(--color-light-gray);
-    border-radius: 20px;
+    border: 1px solid var(--color-middle-gray);
+    border-radius: 80px;
     outline: none;
     box-shadow: none;
 
@@ -393,7 +408,7 @@ input:focus, textarea:focus {
     bottom: 0;
     z-index: 100;
     width: 100%;
-    background: var(--color-light-gray);
+    background-color: var(--color-white);
     display: flex;
     justify-content: space-around;
     padding: 8px 18px;
@@ -452,7 +467,7 @@ input:focus, textarea:focus {
     height: auto;            
     flex-shrink: 0;         
     overflow: hidden;         
-    padding: 10px 14px; 
+    padding: 10px 0px; 
     box-sizing: border-box;  
 }
 
@@ -471,7 +486,7 @@ textarea {
 
 #userInput {
     font-family: 'HelveticaCustom';
-    font-size: 18px;
+    font-size: 16px;
     font-weight: normal;
     padding-top: 16px;
     padding-bottom: 0px;
@@ -482,7 +497,7 @@ textarea {
 input::placeholder,
 textarea::placeholder {
     font-family: 'HelveticaCustom';
-    font-size: 18px;
+    font-size: 16px;
     font-weight: normal;
     color: var(--color-dark-gray);
 }
@@ -516,7 +531,7 @@ textarea::placeholder {
     font-size: 17px;
     font-weight: bold;
     color: var(--color-black);
-    background-color: var(--color-light-gray);
+    background-color: var(--color-white);
     flex: 3;
     padding: 16px 0px;
     border: 1px solid var(--color-middle-gray);
@@ -597,7 +612,7 @@ textarea::placeholder {
     justify-content: space-between;   
     width: 100%;
     margin: 0 auto;      
-    padding: 30px 14px 4px 14px;
+    padding: 6px 0px 4px 0px;
     gap: 12px;
     font-size: 22px;
     font-weight: bold;
@@ -638,6 +653,15 @@ margin-left: auto;
     background-color: transparent;
 }
 
+.no-expenses {
+    text-align: center;
+    padding: 20px;
+    padding-top: 100px;
+    font-family: 'HelveticaCustom';
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-dark-gray);
+}
 
 #expenseTable {
     flex-grow: 1;  
@@ -671,7 +695,7 @@ margin-left: auto;
 #expenseListDisplay {
     width: 100%;  
     display: block;  
-    padding: 0 14px;
+    padding: 0 0px;
 }
 
 #expenseListDisplay tr {
@@ -782,7 +806,7 @@ margin-left: auto;
 }
 
 .expense-item-middle {
-    width: 40%; 
+    width: 38%; 
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -791,7 +815,7 @@ margin-left: auto;
 }
 
 .expense-item-right {
-    width: 10%; 
+    width: 12%; 
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -799,8 +823,19 @@ margin-left: auto;
 }
 
 .expense-item-right .fa-trash {
-    font-size: 16px; 
+    font-size: 24px; 
     color: var(--color-light-black);
+}
+
+.delete-btn {
+    color: var(--color-light-black);
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 24px;
+    margin-left: 10px;
 }
 
 .expense-name {
@@ -818,8 +853,9 @@ margin-left: auto;
 
 .expense-amount {
     font-size: 16px;
-    font-weight: normal;
+    font-weight: lighter;
     color: var(--color-black);
+    font-family: 'Inter', 'HelveticaCustom', Arial, sans-serif;
 }
 
 .expense-date {
@@ -828,17 +864,6 @@ margin-left: auto;
     color: var(--color-dark-gray);
 }
 
-
-.delete-btn {
-    color: var(--color-light-black);
-    background-color: transparent;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-left: 10px;
-}
 
 /*////////////////////////////////////////////////////////////////////////////////*/
 /*////////////////////////////         PAGE 2          ///////////////////////////*/
@@ -866,32 +891,29 @@ margin-left: auto;
 }
 
 
-
 #categoryChart {
-    width: 100% !important;
-    height: auto !important;
-    display: block;
-    margin: 0 auto;
-    margin-top: 0px;
-    padding: 0;
+  width: 100% !important;
+  height: 280px !important;   /* or 260px, adjust */
+  max-height: 300px;
 }
 
 
 .category-bars-title {
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
-    font-weight: normal;
-    color: var(--color-light-black);
-    padding: 10px 15px;
+    padding: 0px;
     border-bottom: 1px solid var(--color-middle-gray);
     margin-top: 0px;
     width:100%;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--color-black);
+
 }
 
 .left-title {
     text-align: left;
-    flex: 1;
+    flex: 2;
 }
 
 .right-title {
@@ -902,7 +924,7 @@ margin-left: auto;
 #category-bars {
     width:100%;
     margin-top: 20px;
-    padding: 0 12px;
+    padding: 0px;
 }
 
 .category-bar {
@@ -914,18 +936,33 @@ margin-left: auto;
 .icon-label {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
-    font-weight: lighter;
-    color: var(--color-light-black);
-    font-weight: 500;
-    margin-bottom: -2px;
-    
+    font-family: 'HelveticaCustom';
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-black);
+    margin-bottom: -2px;    
 }
 
-.amount {
-    font-size: 14px;
-    font-weight: lighter;
+.icon-label i {
+    font-size: 24px;
     color: var(--color-light-black);
+    margin-right: 10px;
+}
+
+
+.amount {
+    font-family: 'Inter', 'HelveticaCustom', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-black);
+}
+
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+
 }
 
 .progress {
@@ -934,6 +971,7 @@ margin-left: auto;
     border-radius: 20px !important;
     width: 100%;
     position: relative;
+    margin-top: 4px;
 }
 
 .progress-bar {
@@ -941,11 +979,12 @@ margin-left: auto;
     border-radius: 1px !important; 
 }
 
-.percentage {
+.progress-percentage {
+    width: 15%;
     text-align: right;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: lighter;
     color: var(--color-dark-gray);
-    margin-top: 5px;
 }
 
 
@@ -974,50 +1013,73 @@ margin-left: auto;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: var(--color-light-gray);
+  background-color:transparent;
 }
 
 .chat-container {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
-  padding-top: 90px;
+  padding: 20px 24px 20px 24px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 180px;    
+  margin-top: 75px;  
+  margin-bottom: 130px;    
   scroll-behavior: smooth;  
+  background-color: var(--color-white);
 }
 
 .chat-input-area {
   display: flex;
   padding: 10px;
-  padding-bottom: 20px;
-  background: var(--color-light-gray);
-  border-top: 1px solid #ddd;
+  padding-bottom: 0px;
+  background: transparent;
+  border-top: 0px;
   position: fixed;     
   bottom: 70px;       
   left: 0;
   right: 0;
   z-index: 20;
+  align-items: center;
+  background-color: var(--color-white);
 }
 
+#chatInput {
+    border: 1px solid var(--color-middle-gray);
+    border-radius: 80px;
+    padding: 10px 15px !important;  /* overwrite only chat box */
+    font-family: 'HelveticaCustom';
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-light-black);
+    line-height: 1.2;
+    resize: none;
+    height: 40px;          /* fixed smaller height */
+    min-height: 40px;      /* default height */
+    max-height: 80px;     /* limit expansion */
+    overflow-y: auto; 
+}
+
+
 .chat-input-area input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  outline: none;
-  resize: none;          
-  overflow: hidden;      
-  min-height: 40px;      
-  max-height: 120px;     
-  font-family: inherit;
-  font-size: 16px;
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    outline: none;
+    resize: none;          
+    overflow: hidden;      
+    min-height: 40px;      
+    max-height: 120px;     
+    font-family: 'HelveticaCustom';
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-light-black);
+    line-height: 1.2;
+
 }
 
 .chat-input-area button {
   margin-left: 10px;
-  margin-top: 15px;
+  margin-top: 0px;
   background: var(--color-lime);
   border: none;
   border-radius: 20px;
@@ -1033,8 +1095,8 @@ margin-left: auto;
 .message {
     max-width: 75%;
     padding: 10px 14px;
-    margin: 8px 0;
-    border-radius: 20px;
+    margin: 4px 0;
+    border-radius: 80px;
     font-family: 'HelveticaCustom';
     font-size: 16px;
     color: var(--color-light-black);
@@ -1043,22 +1105,23 @@ margin-left: auto;
 
 .user-message {
     background: var(--color-lime);
-    color: var(--color-light-black);
     margin-left: auto;
-    border-top-left-radius: 16px;
-    border-bottom-left-radius: 16px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-radius: 30px;
+    font-family: 'HelveticaCustom';
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-black);
 }
 
 .assistant-message { 
-    background: var(--color-middle-gray);
-    color: var(--color-light-black);
+    background: var(--color-light-gray);
     margin-right: auto;
-    border-top-right-radius: 16px;
-    border-bottom-right-radius: 16px;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+    border-radius: 30px;
+    font-family: 'HelveticaCustom';
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-black);
+
 }
 
 .typing {
