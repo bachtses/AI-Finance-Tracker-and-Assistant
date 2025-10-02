@@ -728,7 +728,7 @@ function updateCategoryChart(data) {
               borderWidth: 2,
               hoverOffset: 4,
               radius: '95%',   
-              cutout: '45%'   
+              cutout: '35%'   
             }]
         },
         options: {
@@ -737,7 +737,7 @@ function updateCategoryChart(data) {
           cutout: '45%',
           layout: {
             padding: {
-              top: 20,
+              top: 10,
               bottom: 10,
               left: 85,
               right: 85

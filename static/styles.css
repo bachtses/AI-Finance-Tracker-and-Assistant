@@ -411,8 +411,8 @@ input:focus, textarea:focus {
     background-color: var(--color-white);
     display: flex;
     justify-content: space-around;
-    padding: 8px 18px;
-    margin-top: 15px;
+    padding: 14px 18px;
+    margin-top: 14px;
     border-top: 0px solid var(--color-middle-gray);
     border-radius: 0px;
 }
@@ -543,8 +543,8 @@ textarea::placeholder {
 }
 
 .speak-btn.recording {
-    background-color: var(--color-light-black) !important;
-    color: var(--color-light-gray) !important;
+    background-color: var(--color-black) !important;
+    color: var(--color-white) !important;
     font-size: 16px;
 }
 
@@ -584,9 +584,9 @@ textarea::placeholder {
 .submit-btn:focus {
     outline: none !important;
     box-shadow: none !important;
-    background-color: var(--color-light-black) !important;
-    color: var(--color-light-gray)!important;
-    border: 1px solid rgb(204, 204, 204)!important;
+    background-color: var(--color-black) !important;
+    color: var(--color-white)!important;
+    border: 1px solid var(--color-black)!important;
 }
 
 .submit-btn:active {
@@ -612,7 +612,7 @@ textarea::placeholder {
     justify-content: space-between;   
     width: 100%;
     margin: 0 auto;      
-    padding: 6px 0px 4px 0px;
+    padding: 6px 0px 0px 0px;
     gap: 12px;
     font-size: 22px;
     font-weight: bold;
@@ -641,6 +641,7 @@ margin-left: auto;
     color: var(--color-black);
     width: auto;
     padding: 14px 6px;
+    padding-bottom: 10px;
     border: 0px;
     border-radius: 20px;
     cursor: pointer;
@@ -656,7 +657,7 @@ margin-left: auto;
 .no-expenses {
     text-align: center;
     padding: 20px;
-    padding-top: 100px;
+    padding-top: 40px;
     font-family: 'HelveticaCustom';
     font-size: 16px;
     font-weight: normal;
@@ -769,7 +770,7 @@ margin-left: auto;
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 2px;
+    padding: 10px 0px;
     border-radius: 20px;
     margin-bottom: 8px;
     background-color: var(--color-white);
@@ -802,7 +803,7 @@ margin-left: auto;
     flex-direction: column;
     box-sizing: border-box;
     align-items: flex-start; 
-    gap: 1px;
+    gap: 2px;
 }
 
 .expense-item-middle {
@@ -811,7 +812,7 @@ margin-left: auto;
     flex-direction: column;
     box-sizing: border-box;
     align-items: flex-end; 
-    gap: 1px;
+    gap: 2px;
 }
 
 .expense-item-right {
@@ -893,7 +894,7 @@ margin-left: auto;
 
 #categoryChart {
   width: 100% !important;
-  height: 280px !important;   /* or 260px, adjust */
+  height: 290px !important;   /* or 260px, adjust */
   max-height: 300px;
 }
 
@@ -923,7 +924,7 @@ margin-left: auto;
 
 #category-bars {
     width:100%;
-    margin-top: 20px;
+    margin-top: 24px;
     padding: 0px;
 }
 
@@ -931,16 +932,20 @@ margin-left: auto;
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    padding: 1px 0px;
 }
 
 .icon-label {
     display: flex;
     justify-content: space-between;
+    align-items: center; 
+    height: 100%; 
     font-family: 'HelveticaCustom';
     font-size: 16px;
     font-weight: normal;
     color: var(--color-black);
     margin-bottom: -2px;    
+  
 }
 
 .icon-label i {
@@ -949,6 +954,11 @@ margin-left: auto;
     margin-right: 10px;
 }
 
+.icon-label span {
+    line-height: 1; /* or 100% */
+    display: flex;
+    align-items: center; /* makes sure icon + text align */
+}
 
 .amount {
     font-family: 'Inter', 'HelveticaCustom', Arial, sans-serif;
@@ -1029,18 +1039,18 @@ margin-left: auto;
 }
 
 .chat-input-area {
-  display: flex;
-  padding: 10px;
-  padding-bottom: 0px;
-  background: transparent;
-  border-top: 0px;
-  position: fixed;     
-  bottom: 70px;       
-  left: 0;
-  right: 0;
-  z-index: 20;
-  align-items: center;
-  background-color: var(--color-white);
+    display: flex;
+    padding: 0px 24px 4px 24px;
+    padding-bottom: 0px;
+    background: transparent;
+    border-top: 0px;
+    position: fixed;     
+    bottom: 70px;       
+    left: 0;
+    right: 0;
+    z-index: 20;
+    align-items: center;
+    background-color: var(--color-white);
 }
 
 #chatInput {
