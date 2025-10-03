@@ -315,7 +315,10 @@ function displayExpenses() {
     if (filteredExpenses.length === 0) {
         const emptyRow = document.createElement('div');
         emptyRow.className = "no-expenses";
-        emptyRow.innerHTML = `<p>No expenses yet for ${selectedMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>`;
+        emptyRow.innerHTML = `
+            <img src="/images/empty.png" alt="No expenses" class="empty-img">
+            <p>No expenses yet for ${selectedMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
+        `;
         tableBody.appendChild(emptyRow);
         return;
     }
@@ -349,27 +352,53 @@ function displayExpenses() {
         row.className = 'expense-item';
 
         row.innerHTML = `
-            <div class="expense-item-icon">
-                <i class="fa ${iconClass}" aria-hidden="true"></i>
-            </div>
-            <div class="expense-item-left">
-                <span class="expense-name">${expense.name}</span>
-                <div class="expense-category">${expense.category}</div>
-            </div>
-            <div class="expense-item-middle">
-                <div class="expense-amount">&#8364;${parseFloat(expense.amount).toFixed(2)}</div>
-                <div class="expense-date">${expenseDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>   
-            </div>
-            <div class="expense-item-right">
-                <button class="delete-btn" onclick="deleteExpense(${expense.id})">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
-            </div>
+          <div class="expense-item-main">
+              <div class="expense-item-icon">
+                  <i class="fa ${iconClass}" aria-hidden="true"></i>
+              </div>
+              <div class="expense-item-left">
+                  <span class="expense-name">${expense.name}</span>
+                  <div class="expense-category">${expense.category}</div>
+              </div>
+              <div class="expense-item-middle">
+                  <div class="expense-amount">
+                      <span class="currency">€</span>${parseFloat(expense.amount).toFixed(2)}
+                  </div>
+                  <div class="expense-date">
+                      ${expenseDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  </div>
+              </div>
+              <div class="expense-item-right">
+                  <button class="edit-btn" onclick="toggleEditOptions(this)">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </button>
+              </div>
+          </div>
+
+          <div class="expense-edit-options">
+              <button onclick="deleteExpense(${expense.id})"><i class="fa fa-trash"></i> Remove</button>
+              <button onclick="changeExpenseMonth(${expense.id})"><i class="fa fa-calendar"></i> Edit</button>
+              <button onclick="toggleEditOptions(this)">Close</button>
+          </div>
         `;
         tableBody.appendChild(row);
     });
 }
 
+function toggleEditOptions(button) {
+  const expenseItem = button.closest('.expense-item');
+  expenseItem.classList.toggle('expanded');
+}
+
+function closeEditOptions(button) {
+    const expenseItem = button.closest('.expense-item');
+    expenseItem.classList.remove('expanded');
+}
+
+function changeExpenseMonth(expenseId) {
+    alert("Change month for expense ID: " + expenseId);
+    // Later: implement actual logic to update DB + refresh
+}
 
 // Function to delete an expense from the database
 async function deleteExpense(expenseId) {
@@ -728,7 +757,7 @@ function updateCategoryChart(data) {
               borderWidth: 2,
               hoverOffset: 4,
               radius: '95%',   
-              cutout: '35%'   
+              cutout: '45%'   
             }]
         },
         options: {
@@ -797,7 +826,7 @@ function updateCategoryBars(data, colors) {
             <div class="category-bar">
                 <div class="icon-label">
                     <span><i class="fa ${iconClass}" aria-hidden="true"></i> ${item.category}</span>
-                    <span class="amount">&#8364;${item.total.toFixed(2)}</span>
+                    <span class="amount"><div class="currency">&#8364;</div>${item.total.toFixed(2)}</span>
                 </div>
                 <div class="progress-row">
                     <div class="progress" style="background-color: #E0E0E0; height: 8px; border-radius: 5px; width: 85%;">

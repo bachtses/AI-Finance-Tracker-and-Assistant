@@ -1,6 +1,4 @@
 
-/* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
 /* Regular */
 @font-face {
     font-family: 'HelveticaCustom';
@@ -128,7 +126,7 @@ h2 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 75px;
+  height: 64px;
   display: flex;
   justify-content: space-between;  
   align-items: center;
@@ -153,18 +151,19 @@ h2 {
   font-size: 18px;
   font-weight: bold;
   font-family: 'HelveticaCustom', Arial, sans-serif;
-  color: var(--color-light-black);
+  color: var(--color-black);
 }
 
 .top-bar-title {
   font-size: 24px;
   font-weight: bold;
   font-family: 'HelveticaCustom', Arial, sans-serif;
-  color: var(--color-light-black);
+  color: var(--color-black);
 }
 
 .top-bar i {
   font-size: 24px;
+  color: var(--color-black);
 }
 
 
@@ -255,17 +254,19 @@ h2 {
 }
 
 .login-logo {
-    width: 65px;           
+    width: 86px;           
     margin-bottom: 4px;   
     display: block;    
     margin-left: 0;
 }
 
 .login-box h4 {
-    font-size: 16px;
-    color: var(--color-light-black);
-    margin-bottom: 60px;
+    margin-bottom: 54px;
     text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'HelveticaCustom', Arial, sans-serif;
+    color: var(--color-light-black);
 }
 
 .login-box h1 {
@@ -273,7 +274,7 @@ h2 {
     font-size: 40px;
     font-weight: bold;
     color: var(--color-light-black);
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     text-align: left;
     font-family: 'HelveticaCustom';
     font-weight: bolder;    
@@ -293,6 +294,7 @@ h2 {
     text-align: left;
     padding-right: 30px;
     font-weight: normal;
+    line-height: 1.1;
 }
 
 .login-box input[type="text"],
@@ -321,8 +323,9 @@ h2 {
 }
 
 .login-box button:hover {
-    background-color: var(--color-light-black);
-    color: var(--color-light-gray);
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: 1px solid var(--color-black);
 }
 
 .login-box p {
@@ -379,7 +382,7 @@ input:focus, textarea:focus {
     font-size: 16px;
     color: var(--color-light-black);
     background-color: var(--color-white);
-    padding: 10px 12px;
+    padding: 12px 12px;
     text-align: center;
     text-decoration: none;
     display: block;
@@ -656,13 +659,21 @@ margin-left: auto;
 
 .no-expenses {
     text-align: center;
-    padding: 20px;
-    padding-top: 40px;
+    padding-top: 18px;
     font-family: 'HelveticaCustom';
     font-size: 16px;
     font-weight: normal;
     color: var(--color-dark-gray);
 }
+
+.no-expenses .empty-img {
+    width: 100%;
+    height: 270px;
+    opacity: 1;
+    margin-bottom: 10px;
+}
+
+
 
 #expenseTable {
     flex-grow: 1;  
@@ -766,17 +777,15 @@ margin-left: auto;
 
 
 .expense-item {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0px;
-    border-radius: 20px;
-    margin-bottom: 8px;
-    background-color: var(--color-white);
-    box-shadow: 0 12px 4px -6px rgba(52, 52, 52, 0.05);
-    position: relative;
-    z-index: 0;
+  display: flex;
+  flex-direction: column; /* stack main row + hidden row */
+  width: 100%;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  background-color: var(--color-white);
+  box-shadow: 0 12px 4px -6px rgba(52, 52, 52, 0.05);
+  transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 
@@ -820,23 +829,20 @@ margin-left: auto;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    align-items: flex-end; 
+    align-items: center; 
 }
 
-.expense-item-right .fa-trash {
-    font-size: 24px; 
-    color: var(--color-light-black);
-}
-
-.delete-btn {
+.expense-item-right .edit-btn {
     color: var(--color-light-black);
     background-color: transparent;
     border: none;
     padding: 5px 10px;
+    padding-top:6px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 24px;
-    margin-left: 10px;
+    margin-left: 8px;
+
 }
 
 .expense-name {
@@ -856,7 +862,14 @@ margin-left: auto;
     font-size: 16px;
     font-weight: lighter;
     color: var(--color-black);
+    font-family: 'HelveticaCustom', Arial, sans-serif;
+}
+
+.expense-amount .currency {
     font-family: 'Inter', 'HelveticaCustom', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-black);
 }
 
 .expense-date {
@@ -865,6 +878,52 @@ margin-left: auto;
     color: var(--color-dark-gray);
 }
 
+.expense-item-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px;
+}
+
+/* Hidden options below */
+.expense-edit-options {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  padding: 0 8px;
+}
+
+.expense-item.expanded .expense-edit-options {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 0px;
+  padding: 10px 8px;
+}
+
+.expense-edit-options button {
+  flex: 1;
+  background: var(--color-white);
+  border: 1px solid var(--color-middle-gray);
+  border-radius: 20px;
+  padding: 10px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+
+
+.expense-edit-options button:hover, .expense-edit-options button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: var(--color-black) !important;
+    color: var(--color-white)!important;
+    border: 1px solid var(--color-black)!important;
+}
 
 /*////////////////////////////////////////////////////////////////////////////////*/
 /*////////////////////////////         PAGE 2          ///////////////////////////*/
@@ -903,7 +962,6 @@ margin-left: auto;
     display: flex;
     justify-content: space-between;
     padding: 0px;
-    border-bottom: 1px solid var(--color-middle-gray);
     margin-top: 0px;
     width:100%;
     font-size: 22px;
@@ -955,17 +1013,28 @@ margin-left: auto;
 }
 
 .icon-label span {
-    line-height: 1; /* or 100% */
+    line-height: 1; 
     display: flex;
-    align-items: center; /* makes sure icon + text align */
+    align-items: center;  
 }
 
 .amount {
+    font-family: 'HelveticaCustom', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-black);
+    
+}
+
+.amount .currency {
     font-family: 'Inter', 'HelveticaCustom', Arial, sans-serif;
     font-size: 16px;
     font-weight: normal;
     color: var(--color-black);
+    align-items: center;
+    padding-top: 2px;
 }
+
 
 .progress-row {
   display: flex;
@@ -1033,7 +1102,7 @@ margin-left: auto;
   display: flex;
   flex-direction: column;
   margin-top: 75px;  
-  margin-bottom: 130px;    
+  margin-bottom: 120px;    
   scroll-behavior: smooth;  
   background-color: var(--color-white);
 }
@@ -1056,15 +1125,15 @@ margin-left: auto;
 #chatInput {
     border: 1px solid var(--color-middle-gray);
     border-radius: 80px;
-    padding: 10px 15px !important;  /* overwrite only chat box */
+    padding: 12px 15px !important;  /* overwrite only chat box */
     font-family: 'HelveticaCustom';
     font-size: 16px;
     font-weight: normal;
     color: var(--color-light-black);
     line-height: 1.2;
     resize: none;
-    height: 40px;          /* fixed smaller height */
-    min-height: 40px;      /* default height */
+    height: 48px;          /* fixed smaller height */
+    min-height: 48px;      /* default height */
     max-height: 80px;     /* limit expansion */
     overflow-y: auto; 
 }
